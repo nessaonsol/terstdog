@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gorbot Conscience</title>
+    <link rel="icon" type="" href="gorbot.jpg">
+    <link rel="icon" type="image/x-icon" href="gorbot.jpg">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #ffffff 0%, #f0fff4 25%, #e8f5e8 50%, #d4f1d4 75%, #c8e6c8 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            color: #2d5a2d;
+            overflow-x: hidden;
+        }
+
+        .header {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 40px;
+            z-index: 10;
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(34, 197, 94, 0.2);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 20px;
+            font-weight: bold;
+            color: #2d5a2d;
+            text-decoration: none;
+        }
+
+        .logo-icon {
+            width: 32px;
+            height: 32px;
+            background: rgba(45, 90, 45, 0.1);
+            border: 2px dashed rgba(45, 90, 45, 0.3);
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: rgba(45, 90, 45, 0.7);
+            font-size: 10px;
+            font-weight: normal;
+        }
+
+        .back-btn {
+            background: linear-gradient(135deg, #6b7280, #4b5563);
+            border: none;
+            padding: 10px 20px;
+            border-radius: 25px;
+            color: white;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(107, 114, 128, 0.3);
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .back-btn:hover {
+            background: linear-gradient(135deg, #4b5563, #374151);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(107, 114, 128, 0.4);
+        }
+
+        .main-content {
+            flex: 1;
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .page-title {
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: bold;
+            margin-bottom: 10px;
+            background: linear-gradient(135deg, #15803d, #22c55e, #4ade80);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-align: center;
+        }
+
+        .page-subtitle {
+            text-align: center;
+            font-size: 1.1rem;
+            opacity: 0.8;
+            margin-bottom: 30px;
+            color: #374151;
+        }
+
+        .controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .search-box {
+            flex: 1;
+            max-width: 400px;
+            padding: 12px 20px;
+            border: 1px solid rgba(34, 197, 94, 0.3);
+            border-radius: 25px;
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+
+        .search-box:focus {
+            outline: none;
+            border-color: #22c55e;
+            box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.1);
+        }
+
+        .status-indicator {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            background: rgba(34, 197, 94, 0.1);
+            border: 1px solid rgba(34, 197, 94, 0.3);
+            border-radius: 20px;
+            font-size: 14px;
+            color: #15803d;
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            background: #22c55e;
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.5; }
+            100% { opacity: 1; }
+        }
+
+        .chat-history {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        .day-section {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(34, 197, 94, 0.2);
+            border-radius: 20px;
+            padding: 25px;
+            box-shadow: 0 4px 20px rgba(34, 197, 94, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .day-section:hover {
+            background: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 8px 30px rgba(34, 197, 94, 0.15);
+        }
+
+        .day-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid rgba(34, 197, 94, 0.2);
+        }
+
+        .day-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #22c55e, #16a34a);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            color: white;
+        }
+
+        .day-title {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: #2d5a2d;
+        }
+
+        .day-stats {
+            margin-left: auto;
+            font-size: 0.9rem;
+            opacity: 0.7;
+            color: #4b5563;
+        }
+
+        .chat-list {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .chat-item {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            padding: 20px;
+            background: rgba(248, 250, 252, 0.8);
+            border: 1px solid rgba(34, 197, 94, 0.15);
+            border-radius: 15px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .chat-item:hover {
+            background: rgba(241, 245, 249, 0.9);
+            border-color: rgba(34, 197, 94, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .chat-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .chat-time {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #22c55e;
+        }
+
+        .chat-duration {
+            font-size: 0.8rem;
+            opacity: 0.6;
+            color: #4b5563;
+        }
+
+        .chat-preview {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .message {
+            display: flex;
+            gap: 10px;
+            align-items: flex-start;
+        }
+
+        .message-sender {
+            font-size: 0.8rem;
+            font-weight: 600;
+            min-width: 60px;
+            color: #4b5563;
+        }
+
+        .message-content {
+            flex: 1;
+            font-size: 0.9rem;
+            line-height: 1.4;
+            color: #374151;
+        }
+
+        .user-message .message-sender {
+            color: #1f2937;
+        }
+
+        .bot-message .message-sender {
+            color: #22c55e;
+        }
+
+        .floating-elements {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .gorbot-gif {
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, #22c55e, #16a34a);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+            box-shadow: 0 4px 15px rgba(34, 197, 94, 0.3);
+            animation: fly 12s linear infinite;
+        }
+
+        .gorbot-gif:nth-child(1) {
+            top: 20%;
+            left: -40px;
+            animation-delay: 0s;
+        }
+
+        .gorbot-gif:nth-child(2) {
+            top: 60%;
+            left: -40px;
+            animation-delay: 4s;
+        }
+
+        .gorbot-gif:nth-child(3) {
+            top: 80%;
+            right: -40px;
+            animation-delay: 8s;
+            animation-direction: reverse;
+        }
+
+        @keyframes fly {
+            0% { 
+                transform: translateX(0) translateY(0) rotate(0deg) scale(0.8);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+                transform: translateX(100px) translateY(-10px) rotate(36deg) scale(1);
+            }
+            50% {
+                transform: translateX(calc(50vw)) translateY(-20px) rotate(180deg) scale(1);
+            }
+            90% {
+                opacity: 1;
+                transform: translateX(calc(100vw - 100px)) translateY(-10px) rotate(324deg) scale(1);
+            }
+            100% { 
+                transform: translateX(calc(100vw + 40px)) translateY(0) rotate(360deg) scale(0.8);
+                opacity: 0;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header {
+                padding: 15px 20px;
+            }
+            
+            .main-content {
+                padding: 15px;
+            }
+            
+            .controls {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .search-box {
+                max-width: none;
+            }
+            
+            .day-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+            
+            .day-stats {
+                margin-left: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="floating-elements">
+        <div class="gorbot-gif">🧠</div>
+        <div class="gorbot-gif">💭</div>
+        <div class="gorbot-gif">⚡</div>
+    </div>
+
+    <header class="header">
+        <a href="index.html" class="logo">
+            <div class="logo-icon">BOT</div>
+            Gorbot
+        </a>
+        <a href="index.html" class="back-btn">← Back to Hub</a>
+    </header>
+
+    <main class="main-content">
+        <h1 class="page-title">Gorbot Conscience</h1>
+        <p class="page-subtitle">Browse through Gorbot's recent thoughts and conversations</p>
+
+        <div class="controls">
+            <input type="text" class="search-box" placeholder="Search conversations..." id="searchBox">
+            <div class="status-indicator">
+                <div class="status-dot"></div>
+                Recording conversations
+            </div>
+        </div>
+
+        <div class="chat-history" id="chatHistory">
+            <!-- Chat history will be populated by JavaScript -->
+        </div>
+    </main>
+
+    <script>
+        // Sample chat data for the last 3 days
+        const chatData = {
+            "June 19, 2025": {
+                icon: "🔮",
+                chats: [
+                    {
+                        time: "14:32",
+                        duration: "12 min",
+                        messages: [
+                            { sender: "User", content: "Can you help me understand quantum computing?" },
+                            { sender: "Gorbot", content: "I'd be happy to explain quantum computing! It's a fascinating field that leverages quantum mechanical phenomena like superposition and entanglement..." },
+                            { sender: "User", content: "That's really interesting! How does it differ from classical computing?" },
+                            { sender: "Gorbot", content: "Great question! Classical computers use bits that are either 0 or 1, while quantum computers use qubits that can exist in superposition..." }
+                        ]
+                    },
+                    {
+                        time: "11:15",
+                        duration: "8 min",
+                        messages: [
+                            { sender: "User", content: "What's the best way to learn Python programming?" },
+                            { sender: "Gorbot", content: "Python is an excellent choice for beginners! I'd recommend starting with the fundamentals: variables, data types, and control structures..." },
+                            { sender: "User", content: "Should I focus on any particular libraries?" }
+                        ]
+                    },
+                    {
+                        time: "09:42",
+                        duration: "5 min",
+                        messages: [
+                            { sender: "User", content: "Good morning! How are you today?" },
+                            { sender: "Gorbot", content: "Good morning! I'm functioning well and ready to help. How can I assist you today?" },
+                            { sender: "User", content: "Just wanted to check in and see how you're doing" }
+                        ]
+                    }
+                ]
+            },
+            "June 18, 2025": {
+                icon: "🌟",
+                chats: [
+                    {
+                        time: "16:45",
+                        duration: "20 min",
+                        messages: [
+                            { sender: "User", content: "I'm working on a machine learning project. Can you guide me through the process?" },
+                            { sender: "Gorbot", content: "Absolutely! Let's break down the ML pipeline. First, we need to define your problem type - is it classification, regression, or clustering?" },
+                            { sender: "User", content: "It's a classification problem. I want to predict customer behavior." },
+                            { sender: "Gorbot", content: "Perfect! For customer behavior classification, you'll want to start with data exploration and feature engineering..." }
+                        ]
+                    },
+                    {
+                        time: "13:28",
+                        duration: "15 min",
+                        messages: [
+                            { sender: "User", content: "What are some good practices for web development?" },
+                            { sender: "Gorbot", content: "Great question! Here are some key best practices: semantic HTML, responsive design, performance optimization..." },
+                            { sender: "User", content: "Can you elaborate on performance optimization?" }
+                        ]
+                    },
+                    {
+                        time: "10:20",
+                        duration: "6 min",
+                        messages: [
+                            { sender: "User", content: "Explain blockchain technology in simple terms" },
+                            { sender: "Gorbot", content: "Think of blockchain as a digital ledger that's shared across many computers. Each 'block' contains transaction data..." }
+                        ]
+                    }
+                ]
+            },
+            "June 17, 2025": {
+                icon: "💡",
+                chats: [
+                    {
+                        time: "19:15",
+                        duration: "18 min",
+                        messages: [
+                            { sender: "User", content: "I'm struggling with work-life balance. Any advice?" },
+                            { sender: "Gorbot", content: "Work-life balance is crucial for well-being. Here are some strategies that many find helpful..." },
+                            { sender: "User", content: "These are really helpful suggestions. How do I set better boundaries?" },
+                            { sender: "Gorbot", content: "Setting boundaries starts with clarity about your priorities and communicating them effectively..." }
+                        ]
+                    },
+                    {
+                        time: "14:50",
+                        duration: "25 min",
+                        messages: [
+                            { sender: "User", content: "Can you help me plan a healthy meal prep for the week?" },
+                            { sender: "Gorbot", content: "I'd love to help with meal planning! Let's start by understanding your dietary preferences and any restrictions..." },
+                            { sender: "User", content: "I'm trying to eat more plant-based meals" },
+                            { sender: "Gorbot", content: "Excellent choice! Plant-based meals can be incredibly nutritious and delicious. Here's a weekly plan..." }
+                        ]
+                    },
+                    {
+                        time: "11:30",
+                        duration: "10 min",
+                        messages: [
+                            { sender: "User", content: "What's the latest in renewable energy technology?" },
+                            { sender: "Gorbot", content: "Renewable energy is advancing rapidly! Some exciting developments include improved solar panel efficiency..." }
+                        ]
+                    }
+                ]
+            }
+        };
+
+        function renderChatHistory() {
+            const chatHistory = document.getElementById('chatHistory');
+            chatHistory.innerHTML = '';
+
+            Object.entries(chatData).forEach(([date, dayData]) => {
+                const daySection = document.createElement('div');
+                daySection.className = 'day-section';
+                
+                const totalChats = dayData.chats.length;
+                const totalMessages = dayData.chats.reduce((sum, chat) => sum + chat.messages.length, 0);
+                
+                daySection.innerHTML = `
+                    <div class="day-header">
+                        <div class="day-icon">${dayData.icon}</div>
+                        <div class="day-title">${date}</div>
+                        <div class="day-stats">${totalChats} conversations • ${totalMessages} messages</div>
+                    </div>
+                    <div class="chat-list">
+                        ${dayData.chats.map(chat => `
+                            <div class="chat-item" onclick="expandChat(this)">
+                                <div class="chat-header">
+                                    <div class="chat-time">${chat.time}</div>
+                                    <div class="chat-duration">${chat.duration}</div>
+                                </div>
+                                <div class="chat-preview">
+                                    ${chat.messages.slice(0, 2).map(message => `
+                                        <div class="message ${message.sender.toLowerCase()}-message">
+                                            <div class="message-sender">${message.sender}:</div>
+                                            <div class="message-content">${message.content.length > 100 ? message.content.substring(0, 100) + '...' : message.content}</div>
+                                        </div>
+                                    `).join('')}
+                                    ${chat.messages.length > 2 ? `<div style="text-align: center; color: #22c55e; font-size: 0.8rem; margin-top: 5px;">+${chat.messages.length - 2} more messages</div>` : ''}
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                `;
+                
+                chatHistory.appendChild(daySection);
+            });
+        }
+
+        function expandChat(chatElement) {
+            // This would expand the chat to show all messages
+            // For now, just add a visual feedback
+            chatElement.style.transform = 'scale(0.98)';
+            setTimeout(() => {
+                chatElement.style.transform = 'translateY(-2px)';
+            }, 100);
+        }
+
+        function filterChats() {
+            const searchTerm = document.getElementById('searchBox').value.toLowerCase();
+            const chatItems = document.querySelectorAll('.chat-item');
+            
+            chatItems.forEach(item => {
+                const text = item.textContent.toLowerCase();
+                if (text.includes(searchTerm)) {
+                    item.style.display = 'flex';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        }
+
+        // Event listeners
+        document.getElementById('searchBox').addEventListener('input', filterChats);
+
+        // Initialize the page
+        renderChatHistory();
+    </script>
+</body>
+</html>
