@@ -3,189 +3,284 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>A:t5_f7slr</title>
+    <title>Project Overview</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: white;
+        * {
             margin: 0;
-            padding: 20px;
-            line-height: 1.6;
+            padding: 0;
+            box-sizing: border-box;
         }
-        
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+            color: #ffffff;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            background: white;
-            padding: 40px;
+            padding: 40px 20px;
         }
-        
-        .header {
-            text-align: center;
-            margin-bottom: 40px;
-        }
-        
-        .logo {
-            width: 300px;
-            height: 300px;
-            border-radius: 50%;
-            margin: 0 auto 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-        }
-        
+
         .social-links {
             display: flex;
             justify-content: center;
-            gap: 15px;
-            margin-bottom: 20px;
+            gap: 20px;
+            margin-bottom: 30px;
         }
-        
-        .social-icon {
-            width: 40px;
-            height: 40px;
-            background: #333;
+
+        .social-link svg {
+            pointer-events: none;
+        }
+
+        .social-link {
+            width: 50px;
+            height: 50px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            color: #ffffff;
+            font-size: 20px;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            cursor: pointer;
+            position: relative;
+            z-index: 10;
+        }
+
+        .social-link:hover {
+            background: #64ffda;
+            color: #1a1a1a;
+            transform: translateY(-2px);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .logo {
+            background: #ffffff;
+            margin: 0 auto 20px;
+            padding: 15px 30px;
+            border-radius: 8px;
+            display: inline-block;
+            font-size: 24px;
+            font-weight: bold;
+            color: #1a1a1a;
+            box-shadow: 0 8px 32px rgba(255, 255, 255, 0.1);
+        }
+
+        .main-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: start;
+            margin-bottom: 80px;
+        }
+
+        .content-section {
+            padding: 20px 0;
+        }
+
+        .project-title {
+            font-size: 2.5rem;
+            font-weight: 300;
+            margin-bottom: 30px;
+            letter-spacing: 2px;
+        }
+
+        .highlight {
+            color: #64ffda;
+            font-weight: 600;
+        }
+
+        .description {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+
+        .features {
+            list-style: none;
+        }
+
+        .features li {
+            padding: 8px 0;
+            padding-left: 20px;
+            position: relative;
+            opacity: 0.8;
+        }
+
+        .features li:before {
+            content: "▶";
+            position: absolute;
+            left: 0;
+            color: #64ffda;
+        }
+
+        .image-placeholder {
+            width: 100%;
+            height: 300px;
+            background: #2a2a2a;
             border-radius: 8px;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: white;
-            font-size: 20px;
-            text-decoration: none;
-            transition: background 0.3s ease;
+            border: 1px solid #444444;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
         }
-        
-        .social-icon:hover {
-            background: #555;
+
+        .image-placeholder:hover {
+            border-color: #64ffda;
         }
-        
-        .github-icon {
-            background: #000;
+
+        .uploaded-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 8px;
         }
-        
-        .x-icon {
-            background: #000;
-        }
-        
-        .content-layout {
+
+        .bottom-section {
             display: grid;
-            grid-template-columns: 400px 1fr 400px;
-            gap: 30px;
-            align-items: start;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-top: 60px;
+            margin-bottom: 60px;
         }
-        
-        .social-post {
-            margin-bottom: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
+
+        .details-section {
+            margin-top: 40px;
+            padding: 20px 0;
+            border-left: 4px solid #64ffda;
+            padding-left: 20px;
         }
-        
-        .center-content {
-            text-align: center;
-            padding: 0 20px;
+
+        .details-title {
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            color: #64ffda;
         }
-        
-        .project-title {
-            color: black;
-            font-size: 36px;
-            font-weight: bold;
-            margin-bottom: 20px;
-            text-transform: uppercase;
+
+        .details-text {
+            font-size: 0.95rem;
+            line-height: 1.6;
+            opacity: 0.8;
         }
-        
-        .project-description {
-            color: black;
-            font-size: 16px;
-            margin-bottom: 40px;
+
+        .side-image {
+            height: 250px;
         }
-        
-        .main-text {
-            color: black;
-            font-size: 18px;
-            font-weight: bold;
-            text-transform: uppercase;
-            line-height: 1.8;
-            margin: 40px 0;
-        }
-        
-        .code-block {
-            margin-top: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-        }
-        
-        @media (max-width: 1200px) {
-            .content-layout {
+
+        @media (max-width: 768px) {
+            .main-content,
+            .bottom-section {
                 grid-template-columns: 1fr;
-                gap: 20px;
+                gap: 30px;
             }
             
-            .social-post {
-                max-width: 400px;
-                margin: 10px auto;
+            .project-title {
+                font-size: 2rem;
             }
+
+            .social-links {
+                gap: 15px;
+            }
+
+            .social-link {
+                width: 45px;
+                height: 45px;
+                font-size: 18px;
+            }
+
+            .details-section {
+                margin-top: 30px;
+            }
+        }
+
+        .fade-in {
+            animation: fadeIn 0.8s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
     </style>
 </head>
 <body>
-<div class="social-links">
-        <a href="https://www.reddit.com/r/a:t5_f7slr/" target="_blank" class="social-icon github-icon">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
-            </svg>
-        </a>
-        <a href="https://x.com/At5_f7slr" target="_blank" class="social-icon x-icon">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
-            </svg>
-        </a>
-    </div>
     <div class="container">
-        <div class="header">
-                <div class="logo">
-                    <img src="pfp.png" alt="Social Post 1" style="width: 100%; height: auto; border-radius: 8px;">
-                </div>
+        <div class="header fade-in">
+            <div class="social-links">
+                <a href="https://github.com/aeyakovenko/token-omnibus" target="_blank" rel="noopener noreferrer" class="social-link" title="GitHub">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 0C5.374 0 0 5.373 0 12 0 17.302 3.438 21.8 8.207 23.387c.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/>
+                    </svg>
+                </a>
+                <a href="https://x.com/Token_Ominibus" target="_blank" rel="noopener noreferrer" class="social-link" title="X (Twitter)">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                    </svg>
+                </a>
+            </div>
+            <div class="logo">Omnibus</div>
         </div>
-        
-        <div class="content-layout">
-            <div class="left-posts">
-                <div class="social-post">
-                    <img src="social-post-1.png" alt="Social Post 1" style="width: 100%; height: auto; border-radius: 8px;">
+
+        <div class="main-content">
+            <div class="content-section fade-in">
+                <h1 class="project-title">
+                    WHAT IS<br>
+                    <span class="highlight">OMNIBUS</span><br>
+                    TOKEN?
+                </h1>
+                
+                <div class="description">
+                    Created by Toly, creator of Solana, in 2022 on Solana blockchain. This pioneering project represents some of Toly's earliest experimental token work on his own network.
                 </div>
+
+                <ul class="features">
+                    <li>Omnibus is rumored to be an early experimental token on Solana</li>
+                    <li>It highlights Toly's first token project which has yet to be fully explored</li>
+                    <li>Represents groundbreaking work in Solana ecosystem development</li>
+                </ul>
             </div>
-            
-            <div class="center-content">
-                <div class="project-title">
-                    What is A:t5_f7slr Group?
-                </div>
-                <div class="project-description">
-                    • Created by Toly, co-founder of Solana, in 2019 on Reddit.<br><br>
-                    • a:t5_f7slr is rumored to be an ai toly was creating.<br><br>
-                    • It highlights toly's first project which has yet not been tokenized.
-                </div>
-            </div>
-            
-            <div class="right-posts">
-                <div class="social-post">
-                    <img src="social-post-4.png" alt="Social Post 4" style="width: 100%; height: auto; border-radius: 8px;">
+
+            <div class="fade-in">
+                <div class="image-placeholder">
+                    <img src="image1.png" alt="Solana Wallet" class="uploaded-image">
                 </div>
             </div>
         </div>
-        
-        <div class="bottom-section" style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-top: 40px; align-items: start;">
-            <div class="main-text">
-                A:t5_f7slr:<br>
-                Created by Toly, co-founder of Solana, in 2019 on Reddit. This mysterious project represents some of Toly's earliest experimental work in AI development. The cryptic name "a:t5_f7slr" suggests an advanced AI system that Toly was developing during the early days before Solana's launch. This project highlights Toly's first venture into artificial intelligence and remains one of his most intriguing creations that has yet to be tokenized.
+
+        <div class="bottom-section">
+            <div class="fade-in">
+                <div class="image-placeholder">
+                    <img src="image2.png" alt="Token Analytics" class="uploaded-image">
+                </div>
             </div>
-            
-            <div class="code-block">
-                <img src="code-snippet.png" alt="Code Snippet" style="width: 100%; height: auto; border-radius: 8px;">
+
+            <div class="fade-in">
+                <div class="image-placeholder side-image">
+                    <img src="image3.png" alt="Solana Explorer" class="uploaded-image">
+                </div>
+            </div>
+        </div>
+
+        <div class="details-section fade-in">
+            <div class="details-title">OMNIBUS TOKEN:</div>
+            <div class="details-text">
+                CREATED BY TOLY (ANATOLY YAKOVENKO), CREATOR OF SOLANA, IN 2022 ON THE SOLANA BLOCKCHAIN. THIS MYSTERIOUS PROJECT REPRESENTS SOME OF TOLY'S EARLIEST EXPERIMENTAL TOKEN WORK ON HIS OWN REVOLUTIONARY NETWORK. THE CRYPTIC NAME "OMNIBUS" SUGGESTS A COMPREHENSIVE TOKEN SYSTEM THAT TOLY WAS DEVELOPING DURING THE EARLY DAYS OF SOLANA'S GROWTH. THIS PROJECT HIGHLIGHTS TOLY'S FIRST VENTURE INTO TOKEN CREATION AND REMAINS ONE OF HIS MOST INTRIGUING CREATIONS THAT HAS YET TO BE FULLY EXPLORED BY THE SOLANA COMMUNITY.
             </div>
         </div>
     </div>
