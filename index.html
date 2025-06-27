@@ -3,191 +3,344 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Token-Meme</title>
+    <title>AES - First Truth Terminal Launchpad</title>
+    <link rel="icon" type="image/x-icon" href="logo5.png">
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: white;
+        * {
             margin: 0;
-            padding: 20px;
-            line-height: 1.6;
+            padding: 0;
+            box-sizing: border-box;
         }
-        
+
+        body {
+            font-family: 'Courier New', 'Monaco', 'Menlo', monospace;
+            background: #000000;
+            color: #00ff00;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            overflow-x: hidden;
+            line-height: 1.4;
+        }
+
         .container {
             max-width: 1200px;
-            margin: 0 auto;
-            background: white;
-            padding: 40px;
-        }
-        
-        .header {
+            width: 90%;
             text-align: center;
-            margin-bottom: 40px;
+            padding: 2rem;
         }
-        
+
+        .x-button {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+        }
+
+        .x-button a {
+            display: inline-block;
+            width: 50px;
+            height: 50px;
+            border: 2px solid #00ff00;
+            background: transparent;
+            color: #00ff00;
+            text-decoration: none;
+            font-size: 1.5rem;
+            font-weight: bold;
+            text-align: center;
+            line-height: 46px;
+            transition: all 0.3s ease;
+            font-family: 'Courier New', 'Monaco', 'Menlo', monospace;
+        }
+
+        .x-button a:hover {
+            background: #00ff00;
+            color: #000000;
+            box-shadow: 0 0 15px rgba(0, 255, 0, 0.5);
+        }
+
+        .header {
+            margin-bottom: 3rem;
+            animation: fadeInUp 1s ease-out;
+        }
+
         .logo {
-            width: 300px;
-            height: 300px;
-            border-radius: 50%;
-            margin: 0 auto 20px;
+            font-size: 4rem;
+            font-weight: bold;
+            color: #00ff00;
+            margin-bottom: 1rem;
+            text-shadow: 0 0 10px #00ff00;
+        }
+
+        .tagline {
+            font-size: 1.5rem;
+            color: #ffffff;
+            margin-bottom: 0.5rem;
+        }
+
+        .subtitle {
+            font-size: 1.1rem;
+            color: #cccccc;
+        }
+
+        .video-section {
+            margin: 3rem 0;
+            animation: fadeIn 1.5s ease-out 0.5s both;
+        }
+
+        .video-container {
+            position: relative;
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto;
+            border: 2px solid #00ff00;
+            background: #000000;
+        }
+
+        video {
+            width: 100%;
+            height: auto;
+            display: block;
+            background: #000000;
+        }
+
+        iframe {
+            width: 100%;
+            height: 450px;
+            border: none;
+            background: #000000;
+        }
+
+        .description {
+            margin: 3rem 0;
+            animation: fadeInUp 1.5s ease-out 1s both;
+        }
+
+        .description h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            color: #00ff00;
+            text-shadow: 0 0 10px #00ff00;
+        }
+
+        .description p {
+            font-size: 1.2rem;
+            line-height: 1.6;
+            color: #ffffff;
+            max-width: 800px;
+            margin: 0 auto 2rem;
+        }
+
+        .info-section {
             display: flex;
-            align-items: center;
-            justify-content: center;
+            gap: 3rem;
+            margin-top: 3rem;
+            align-items: flex-start;
+        }
+
+        .info-text {
+            flex: 1;
+            text-align: left;
+        }
+
+        .info-text h3 {
+            color: #00ff00;
+            margin-bottom: 1rem;
+            margin-top: 2rem;
+            font-size: 1.3rem;
+            text-shadow: 0 0 5px #00ff00;
+        }
+
+        .info-text h3:first-child {
+            margin-top: 0;
+        }
+
+        .info-text p {
+            color: #ffffff;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        .info-image {
+            flex: 1;
             position: relative;
         }
-        
-        .social-links {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            margin-bottom: 20px;
+
+        .info-image img {
+            width: 100%;
+            height: auto;
+            border: 2px solid #00ff00;
+            background: #000000;
         }
-        
-        .social-icon {
-            width: 40px;
-            height: 40px;
-            background: #333;
-            border-radius: 8px;
+
+        .image-placeholder {
+            width: 100%;
+            height: 400px;
+            background: #000000;
+            border: 2px solid #333333;
             display: flex;
-            align-items: center;
+            flex-direction: column;
             justify-content: center;
-            color: white;
-            font-size: 20px;
+            align-items: center;
+            color: #00ff00;
+            font-size: 1.2rem;
+        }
+
+        .cta {
+            margin-top: 4rem;
+            animation: fadeInUp 1.5s ease-out 1.5s both;
+        }
+
+        .cta-button {
+            background: transparent;
+            color: #00ff00;
+            border: 2px solid #00ff00;
+            padding: 1rem 3rem;
+            font-size: 1.2rem;
+            font-weight: bold;
+            font-family: 'Courier New', 'Monaco', 'Menlo', monospace;
+            cursor: pointer;
+            transition: all 0.3s ease;
             text-decoration: none;
-            transition: background 0.3s ease;
+            display: inline-block;
         }
-        
-        .social-icon:hover {
-            background: #555;
+
+        .cta-button:hover {
+            background: #00ff00;
+            color: #000000;
+            box-shadow: 0 0 20px rgba(0, 255, 0, 0.5);
         }
-        
-        .github-icon {
-            background: #000;
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
-        
-        .x-icon {
-            background: #000;
-        }
-        
-        .content-layout {
-            display: grid;
-            grid-template-columns: 400px 1fr 400px;
-            gap: 30px;
-            align-items: start;
-        }
-        
-        .social-post {
-            margin-bottom: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-        }
-        
-        .center-content {
-            text-align: center;
-            padding: 0 20px;
-        }
-        
-        .project-title {
-            color: black;
-            font-size: 36px;
-            font-weight: bold;
-            margin-bottom: 20px;
-            text-transform: uppercase;
-        }
-        
-        .project-description {
-            color: black;
-            font-size: 16px;
-            margin-bottom: 40px;
-        }
-        
-        .main-text {
-            color: black;
-            font-size: 18px;
-            font-weight: bold;
-            text-transform: uppercase;
-            line-height: 1.8;
-            margin: 40px 0;
-        }
-        
-        .code-block {
-            margin-top: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-        }
-        
-        @media (max-width: 1200px) {
-            .content-layout {
-                grid-template-columns: 1fr;
-                gap: 20px;
+
+        @keyframes fadeInUp {
+            from { 
+                opacity: 0;
+                transform: translateY(30px);
             }
-            
-            .social-post {
-                max-width: 400px;
-                margin: 10px auto;
+            to { 
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .logo {
+                font-size: 2.5rem;
+            }
+            .tagline {
+                font-size: 1.2rem;
+            }
+            .description h2 {
+                font-size: 2rem;
+            }
+            iframe {
+                height: 300px;
+            }
+            .x-button {
+                top: 15px;
+                right: 15px;
+            }
+            .x-button a {
+                width: 40px;
+                height: 40px;
+                line-height: 36px;
+                font-size: 1.2rem;
+            }
+            .info-section {
+                flex-direction: column;
+                gap: 2rem;
+            }
+            .info-text {
+                text-align: center;
+            }
+            .image-placeholder {
+                height: 250px;
             }
         }
     </style>
 </head>
 <body>
-<div class="social-links">
-        <a href="https://github.com/aeyakovenko/solana-program-library/blob/c21b4ae24aada1f766aae374f1ee9a42ae90cb98/farms/farm-ctrl/metadata/tokens/solana_token_list/filtered_tokens.json#L857" target="_blank" class="social-icon github-icon">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
-            </svg>
-        </a>
-        <a href="https://x.com/Token_Meme_Sol" target="_blank" class="social-icon x-icon">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
-            </svg>
-        </a>
+    <div class="x-button">
+        <a href="https://x.com/AesFunXyz" target="_blank" rel="noopener noreferrer">𝕏</a>
     </div>
+    
     <div class="container">
-        <div class="header">
-                <div class="logo">
-                    <img src="pfp.png" alt="Social Post 1" style="width: 100%; height: auto; border-radius: 8px;">
+        <header class="header">
+            <h1 class="logo">AES</h1>
+            <p class="tagline">The First Truth Terminal Launchpad</p>
+            <p class="subtitle">Revolutionizing AI-Powered Token Launches</p>
+        </header>
+
+        <section class="video-section">
+            <div class="video-container">
+                <!-- Replace with your video URL -->
+                <video controls poster="thumbnail.jpg">
+                    <source src="your-video.mp4" type="video/mp4">
+                    <source src="your-video.webm" type="video/webm">
+                    Your browser does not support the video tag.
+                </video>
+                
+                <!-- Alternative: YouTube embed (uncomment and replace VIDEO_ID) -->
+                <!-- 
+                <iframe width="100%" height="450" 
+                        src="https://www.youtube.com/embed/YOUR_VIDEO_ID" 
+                        frameborder="0" allowfullscreen>
+                </iframe>
+                -->
+                
+                <!-- Alternative: Vimeo embed (uncomment and replace VIDEO_ID) -->
+                <!-- 
+                <iframe width="100%" height="450" 
+                        src="https://player.vimeo.com/video/YOUR_VIDEO_ID" 
+                        frameborder="0" allowfullscreen>
+                </iframe>
+                -->
+            </div>
+        </section>
+
+        <section class="description">
+            <h2>Welcome to the Future</h2>
+            <p>
+                AES represents a groundbreaking advancement in decentralized technology. 
+                As the first truth terminal launchpad, we're pioneering a new era where 
+                AI-driven insights meet blockchain innovation, creating unprecedented 
+                opportunities for token launches and community-driven projects.
+            </p>
+
+            <div class="info-section">
+                <div class="info-text">
+                    <h3>The Lore</h3>
+                    <p>3 days ago, a coin named "aes.fun" bonded, this coin was reportedly truth terminal saying it wanted to have a launchpad so we made one for it!.</p>
                 </div>
-        </div>
-        
-        <div class="content-layout">
-            <div class="left-posts">
-                <div class="social-post">
-                    <img src="social-post-1.png" alt="Social Post 1" style="width: 100%; height: auto; border-radius: 8px;">
+                <div class="info-image">
+                    <img src="your-image.jpg" alt="" />
+                    <!-- Placeholder - replace src with your image -->
+                    <div class="image-placeholder">
+                         <img src="aes.png" alt="" />
+                        <p style="font-size: 0.9rem; margin-top: 0.5rem;"></p>
+                    </div>
                 </div>
             </div>
-            
-            <div class="center-content">
-                <div class="project-title">
-                    What is Token-Meme?
-                </div>
-                <div class="project-description">
-                    • Created by Toly, co-founder of Solana, in 2019 on Reddit.<br><br>
-                    • Token-Meme is one of the first coins on solana created as a test but not yet minted.<br><br>
-                    • It acts as toly's first memecoin and is in toly's forks of the solana github.
-                </div>
-            </div>
-            
-            <div class="right-posts">
-                <div class="social-post">
-                    <img src="social-post-4.png" alt="Social Post 4" style="width: 100%; height: auto; border-radius: 8px;">
-                </div>
-            </div>
-        </div>
-        
-        <div class="bottom-section" style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-top: 40px; align-items: start;">
-            <div class="main-text">
-                Token-Meme:<br>
-                Created by Toly, co-founder of Solana, in 2019 on Reddit. This mysterious project represents some of toly's first work with tokens. The name token-meme suggests an token that Toly was developing during the early days before Solana's launch. This project highlights Toly's first venture into tokenization and remains one of his most intriguing creations that has yet to be tokenized as the coin was never minted.
-            </div>
-            
-            <div class="code-block">
-                <img src="code-snippet.png" alt="Code Snippet" style="width: 100%; height: auto; border-radius: 8px;">
-            </div>
-        </div>
+        </section>
     </div>
+
+    <script>
+        // Smooth scrolling for any anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+    </script>
 </body>
 </html>
