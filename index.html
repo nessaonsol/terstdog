@@ -3,191 +3,453 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bump</title>
+    <title>$MES Memecoin Exchange</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: white;
+        @import url('https://fonts.googleapis.com/css2?family=Courier+New&display=swap');
+        
+        * {
             margin: 0;
-            padding: 20px;
-            line-height: 1.6;
+            padding: 0;
+            box-sizing: border-box;
         }
         
-        .container {
+        body {
+            background: #000;
+            color: #fff;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            line-height: 1.4;
+            overflow-x: auto;
+            min-height: 100vh;
+        }
+        
+        .terminal-container {
+            padding: 20px;
             max-width: 1200px;
             margin: 0 auto;
-            background: white;
-            padding: 40px;
         }
         
         .header {
-            text-align: center;
-            margin-bottom: 40px;
-        }
-        
-        .logo {
-            width: 300px;
-            height: 300px;
-            border-radius: 50%;
-            margin: 0 auto 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            border: 1px solid #fff;
+            padding: 10px;
+            margin-bottom: 20px;
+            background: #000;
             position: relative;
         }
         
-        .social-links {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            margin-bottom: 20px;
-        }
-        
-        .social-icon {
-            width: 40px;
-            height: 40px;
-            background: #333;
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 20px;
+        .x-logo {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            color: #fff;
+            font-size: 24px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.2s;
             text-decoration: none;
-            transition: background 0.3s ease;
         }
         
-        .social-icon:hover {
-            background: #555;
+        .x-logo:hover {
+            color: #ccc;
+            transform: scale(1.1);
         }
         
-        .github-icon {
-            background: #000;
+        .logo {
+            color: #fff;
+            font-size: 32px;
+            text-align: center;
+            margin-bottom: 10px;
+            font-weight: bold;
         }
         
-        .x-icon {
-            background: #000;
-        }
-        
-        .content-layout {
+        .exchange-grid {
             display: grid;
-            grid-template-columns: 400px 1fr 400px;
-            gap: 30px;
-            align-items: start;
-        }
-        
-        .social-post {
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
             margin-bottom: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
         }
         
-        .center-content {
-            text-align: center;
-            padding: 0 20px;
+        .panel {
+            border: 1px solid #fff;
+            padding: 15px;
+            background: #000;
         }
         
-        .project-title {
-            color: black;
-            font-size: 36px;
-            font-weight: bold;
-            margin-bottom: 20px;
-            text-transform: uppercase;
-        }
-        
-        .project-description {
-            color: black;
+        .panel-title {
+            color: #fff;
+            margin-bottom: 10px;
             font-size: 16px;
-            margin-bottom: 40px;
+            border-bottom: 1px solid #fff;
+            padding-bottom: 5px;
         }
         
-        .main-text {
-            color: black;
-            font-size: 18px;
-            font-weight: bold;
-            text-transform: uppercase;
-            line-height: 1.8;
-            margin: 40px 0;
+        .balance-display {
+            margin-bottom: 15px;
         }
         
-        .code-block {
-            margin-top: 20px;
+        .balance-item {
             display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
+            justify-content: space-between;
+            margin-bottom: 5px;
+            padding: 2px 0;
         }
         
-        @media (max-width: 1200px) {
-            .content-layout {
+        .coin-list {
+            max-height: 300px;
+            overflow-y: auto;
+        }
+        
+        .coin-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px;
+            margin-bottom: 5px;
+            border: 1px solid #333;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .coin-item:hover {
+            background: #222;
+            border-color: #fff;
+        }
+        
+        .coin-item.selected {
+            background: #333;
+            border-color: #fff;
+        }
+        
+        .coin-name {
+            color: #fff;
+        }
+        
+        .coin-price {
+            color: #fff;
+        }
+        
+        .trade-form {
+            margin-top: 15px;
+        }
+        
+        .form-group {
+            margin-bottom: 10px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: #fff;
+        }
+        
+        .form-group input {
+            width: 100%;
+            padding: 8px;
+            background: #000;
+            border: 1px solid #fff;
+            color: #fff;
+            font-family: inherit;
+        }
+        
+        .form-group input:focus {
+            outline: none;
+            border-color: #ccc;
+            box-shadow: 0 0 5px rgba(255, 255, 255, 0.3);
+        }
+        
+        .btn {
+            background: #000;
+            border: 1px solid #fff;
+            color: #fff;
+            padding: 10px 20px;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 14px;
+            transition: all 0.2s;
+            width: 100%;
+            margin-top: 10px;
+        }
+        
+        .btn:hover {
+            background: #333;
+            color: #fff;
+        }
+        
+        .ascii-art {
+            text-align: center;
+            margin: 20px 0;
+            color: #fff;
+            font-size: 12px;
+        }
+        
+        .status-bar {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px;
+            border-top: 1px solid #fff;
+            margin-top: 20px;
+            font-size: 12px;
+        }
+        
+        .blink {
+            animation: blink 1s infinite;
+        }
+        
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
+        }
+        
+        .price-change-up {
+            color: #fff;
+        }
+        
+        .price-change-down {
+            color: #ccc;
+        }
+        
+        @media (max-width: 768px) {
+            .exchange-grid {
                 grid-template-columns: 1fr;
-                gap: 20px;
-            }
-            
-            .social-post {
-                max-width: 400px;
-                margin: 10px auto;
             }
         }
     </style>
 </head>
 <body>
-<div class="social-links">
-        <a href="https://github.com/search?q=repo%3Agomoonit%2Fmoonshot-sdk%20bump&type=code" target="_blank" class="social-icon github-icon">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
-            </svg>
-        </a>
-        <a href="https://x.com/TheBumpCoin" target="_blank" class="social-icon x-icon">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
-            </svg>
-        </a>
-    </div>
-    <div class="container">
+    <div class="terminal-container">
         <div class="header">
-                <div class="logo">
-                    <img src="pfp.png" alt="" style="width: 100%; height: auto; border-radius: 8px;">
-                </div>
-        </div>
-        
-        <div class="content-layout">
-            <div class="left-posts">
-                <div class="social-post">
-                    <img src="social-post-1.png" alt="Social Post 1" style="width: 100%; height: auto; border-radius: 8px;">
-                </div>
+            <a href="https://x.com/MemeSimulation_" target="_blank" class="x-logo" title="Follow us on X">𝕏</a>
+            <div class="logo">
+                MES
             </div>
-            
-            <div class="center-content">
-                <div class="project-title">
-                    What is Bump?
-                </div>
-                <div class="project-description">
-                    • Created by Moonshot's Team as a test token<br><br>
-                    • Bump is one of the first coins on moonshot launchpad created as a test but not yet minted.<br><br>
-                    • It acts as the only test token located inside the github.
-                </div>
-            </div>
-            
-            <div class="right-posts">
-                <div class="social-post">
-                    <img src="social-post-4.png" alt="Social Post 4" style="width: 100%; height: auto; border-radius: 8px;">
-                </div>
+            <div style="text-align: center; color: #fff;">
+                Meme Economy Simulation 
             </div>
         </div>
         
-        <div class="bottom-section" style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-top: 40px; align-items: start;">
-            <div class="main-text">
-                Bump:<br>
-                Created by the moonshot development team on their official github, bump is the only token so far which hasnt been minted on solana yet until now, the full source code is linked at the top of the page on the github button
+        <div class="exchange-grid">
+            <div class="panel">
+                <div class="panel-title">► WALLET BALANCE</div>
+                <div class="balance-display">
+                    <div class="balance-item">
+                        <span>$MES:</span>
+                        <span style="color: #fff;">1,337,420.69</span>
+                    </div>
+                    <div class="balance-item">
+                        <span>SOL:</span>
+                        <span style="color: #fff;">42.069</span>
+                    </div>
+                    <div class="balance-item">
+                        <span>TOTAL USD:</span>
+                        <span style="color: #fff;">$6,969.42</span>
+                    </div>
+                </div>
+                
+                <div class="panel-title">► TRADE $MES</div>
+                <div class="trade-form">
+                    <div class="form-group">
+                        <label>Amount to Spend ($MES):</label>
+                        <input type="number" id="mesAmount" placeholder="Enter $MES amount" value="1000">
+                    </div>
+                    <div class="form-group">
+                        <label>Selected Coin:</label>
+                        <input type="text" id="selectedCoin" readonly placeholder="Select a coin" value="$BONK">
+                    </div>
+                    <div class="form-group">
+                        <label>You'll Receive:</label>
+                        <input type="text" id="receiveAmount" readonly placeholder="0.00" value="42,069.420">
+                    </div>
+                    <button class="btn" onclick="executeTrade()">EXECUTE TRADE</button>
+                    <button class="btn" onclick="simulatePrice()" style="margin-top: 5px;">SIMULATE MOONSHOT</button>
+                </div>
             </div>
             
-            <div class="code-block">
-                <img src="code-snippet.png" alt="Code Snippet" style="width: 100%; height: auto; border-radius: 8px;">
+            <div class="panel">
+                <div class="panel-title">► AVAILABLE MEMECOINS</div>
+                <div class="coin-list" id="coinList">
+                    <div class="coin-item selected" onclick="selectCoin(this, 'BONK', '0.00002369')">
+                        <div>
+                            <div class="coin-name">$BONK</div>
+                            <div style="font-size: 11px;">Bonk Inu</div>
+                        </div>
+                        <div>
+                            <div class="coin-price">$0.00002369</div>
+                            <div class="price-change-up" style="font-size: 11px;">+42.0%</div>
+                        </div>
+                    </div>
+                    
+                    <div class="coin-item" onclick="selectCoin(this, 'WIF', '2.34')">
+                        <div>
+                            <div class="coin-name">$WIF</div>
+                            <div style="font-size: 11px;">Dogwifhat</div>
+                        </div>
+                        <div>
+                            <div class="coin-price">$2.34</div>
+                            <div class="price-change-up" style="font-size: 11px;">+15.7%</div>
+                        </div>
+                    </div>
+                    
+                    <div class="coin-item" onclick="selectCoin(this, 'PEPE', '0.00001337')">
+                        <div>
+                            <div class="coin-name">$PEPE</div>
+                            <div style="font-size: 11px;">Pepe</div>
+                        </div>
+                        <div>
+                            <div class="coin-price">$0.00001337</div>
+                            <div class="price-change-down" style="font-size: 11px;">-6.9%</div>
+                        </div>
+                    </div>
+                    
+                    <div class="coin-item" onclick="selectCoin(this, 'SHIB', '0.00002420')">
+                        <div>
+                            <div class="coin-name">$SHIB</div>
+                            <div style="font-size: 11px;">Shiba Inu</div>
+                        </div>
+                        <div>
+                            <div class="coin-price">$0.00002420</div>
+                            <div class="price-change-up" style="font-size: 11px;">+8.8%</div>
+                        </div>
+                    </div>
+                    
+                    <div class="coin-item" onclick="selectCoin(this, 'DOGE', '0.32')">
+                        <div>
+                            <div class="coin-name">$DOGE</div>
+                            <div style="font-size: 11px;">Dogecoin</div>
+                        </div>
+                        <div>
+                            <div class="coin-price">$0.32</div>
+                            <div class="price-change-up" style="font-size: 11px;">+12.3%</div>
+                        </div>
+                    </div>
+                    
+                    <div class="coin-item" onclick="selectCoin(this, 'FLOKI', '0.00015')">
+                        <div>
+                            <div class="coin-name">$FLOKI</div>
+                            <div style="font-size: 11px;">Floki</div>
+                        </div>
+                        <div>
+                            <div class="coin-price">$0.00015</div>
+                            <div class="price-change-down" style="font-size: 11px;">-3.2%</div>
+                        </div>
+                    </div>
+                </div>
             </div>
+        </div>
+        
+        <div class="ascii-art">
+            <pre>
+    ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
+    █ TO THE MOON 🚀 WAGMI 💎🙌 DIAMOND HANDS ONLY █
+    ▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
+            </pre>
+        </div>
+        
+        <div class="status-bar">
+            <span>SOL NETWORK: <span class="blink" style="color: #00ff00;">●</span> ONLINE</span>
+            <span>LAST UPDATE: <span id="timestamp">2025-07-01 13:37:42</span></span>
+            <span>GAS: <span style="color: #ffff00;">0.000005 SOL</span></span>
         </div>
     </div>
+    
+    <script>
+        let selectedCoinData = { symbol: 'BONK', price: '0.00002369' };
+        
+        function selectCoin(element, symbol, price) {
+            // Remove selection from all coins
+            document.querySelectorAll('.coin-item').forEach(item => {
+                item.classList.remove('selected');
+            });
+            
+            // Select clicked coin
+            element.classList.add('selected');
+            selectedCoinData = { symbol, price };
+            
+            // Update form
+            document.getElementById('selectedCoin').value = '$' + symbol;
+            calculateReceiveAmount();
+        }
+        
+        function calculateReceiveAmount() {
+            const mesAmount = parseFloat(document.getElementById('mesAmount').value) || 0;
+            const mesPrice = 0.001; // Assume $MES is worth $0.001
+            const coinPrice = parseFloat(selectedCoinData.price);
+            
+            const usdValue = mesAmount * mesPrice;
+            const receiveAmount = usdValue / coinPrice;
+            
+            document.getElementById('receiveAmount').value = receiveAmount.toLocaleString('en-US', {
+                maximumFractionDigits: 6
+            });
+        }
+        
+        function executeTrade() {
+            const mesAmount = document.getElementById('mesAmount').value;
+            const coinSymbol = selectedCoinData.symbol;
+            const receiveAmount = document.getElementById('receiveAmount').value;
+            
+            // Simulate loading
+            const btn = event.target;
+            btn.textContent = 'PROCESSING TRANSACTION...';
+            btn.style.color = '#ccc';
+            
+            setTimeout(() => {
+                alert(`🚀 TRADE EXECUTED! 🚀\n\nSent: ${mesAmount} $MES\nReceived: ${receiveAmount} $${coinSymbol}\n\nTransaction Hash: 0x1337420...\n\nTO THE MOON! 💎🙌`);
+                btn.textContent = 'EXECUTE TRADE';
+                btn.style.color = '#fff';
+            }, 2000);
+        }
+        
+        function simulatePrice() {
+            const coins = document.querySelectorAll('.coin-item');
+            coins.forEach(coin => {
+                const priceElement = coin.querySelector('.coin-price');
+                const changeElement = coin.querySelector('[style*="font-size: 11px"]:last-child');
+                
+                // Random price change
+                const change = (Math.random() - 0.5) * 0.2; // ±10%
+                const isPositive = change > 0;
+                
+                changeElement.textContent = (isPositive ? '+' : '') + (change * 100).toFixed(1) + '%';
+                changeElement.className = isPositive ? 'price-change-up' : 'price-change-down';
+                
+                // Add flash effect
+                priceElement.style.color = isPositive ? '#ccc' : '#666';
+                setTimeout(() => {
+                    priceElement.style.color = '#fff';
+                }, 500);
+            });
+        }
+        
+        // Auto-update timestamp
+        function updateTimestamp() {
+            const now = new Date();
+            document.getElementById('timestamp').textContent = 
+                now.getFullYear() + '-' + 
+                String(now.getMonth() + 1).padStart(2, '0') + '-' + 
+                String(now.getDate()).padStart(2, '0') + ' ' +
+                String(now.getHours()).padStart(2, '0') + ':' + 
+                String(now.getMinutes()).padStart(2, '0') + ':' + 
+                String(now.getSeconds()).padStart(2, '0');
+        }
+        
+        // Auto-calculate when amount changes
+        document.getElementById('mesAmount').addEventListener('input', calculateReceiveAmount);
+        
+        // Initial calculation
+        calculateReceiveAmount();
+        
+        // Update timestamp every second
+        setInterval(updateTimestamp, 1000);
+        
+        // Simulate price updates every 3 seconds
+        setInterval(() => {
+            const randomCoin = document.querySelectorAll('.coin-item')[Math.floor(Math.random() * 6)];
+            const priceElement = randomCoin.querySelector('.coin-price');
+            priceElement.style.color = '#ccc';
+            setTimeout(() => {
+                priceElement.style.color = '#fff';
+            }, 200);
+        }, 3000);
+    </script>
 </body>
 </html>
