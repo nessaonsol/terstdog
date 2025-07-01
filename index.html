@@ -3,923 +3,187 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>StockScreener</title>
+    <title>Bump</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        function connectWallet() {
-            // Simulate wallet connection (in real app, would use Solana wallet adapter)
-            const mockAddress = "7xKXtg2CW87d97TXJSDpbD5jBkheTqA83TZRuJosgAsU";
-            
-            document.getElementById('walletSection').style.display = 'none';
-            document.getElementById('connectedWallet').style.display = 'block';
-            document.getElementById('walletAddress').textContent = mockAddress;
-        }
-
-        function disconnectWallet() {
-            document.getElementById('walletSection').style.display = 'block';
-            document.getElementById('connectedWallet').style.display = 'none';
-        }
-
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: #0a0b0d;
-            color: #ffffff;
-            min-height: 100vh;
-            display: flex;
-        }
-
-        .sidebar {
-            width: 200px;
-            background: #111827;
-            border-right: 1px solid #1f2937;
-            padding: 1.5rem 0;
-            flex-shrink: 0;
-        }
-
-        .logo {
-            padding: 0 1.5rem 2rem 1.5rem;
-            border-bottom: 1px solid #1f2937;
-            margin-bottom: 1rem;
-        }
-
-        .logo-text {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: #4f46e5;
-        }
-
-        .nav-item {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            padding: 0.75rem 1.5rem;
-            color: #9ca3af;
-            cursor: pointer;
-            transition: all 0.2s;
-            border: none;
-            background: none;
-            width: 100%;
-            text-align: left;
-            font-size: 0.95rem;
-        }
-
-        .nav-item:hover {
-            background: #1f2937;
-            color: #ffffff;
-        }
-
-        .nav-item.active {
-            background: #4f46e5;
-            color: #ffffff;
-        }
-
-        .nav-icon {
-            font-size: 1.2rem;
-            width: 20px;
-        }
-
-        .main-content {
-            flex: 1;
-            overflow-y: auto;
-        }
-
-        .header {
-            padding: 1.5rem 2rem;
-            border-bottom: 1px solid #1f2937;
-            background: #0a0b0d;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .header-title {
-            font-size: 1.5rem;
-            font-weight: 600;
-            color: #ffffff;
-        }
-
-        .social-link {
-            background: #1a1d21;
-            border: 1px solid #2d3748;
-            border-radius: 8px;
-            padding: 0.75rem;
-            color: #9ca3af;
-            text-decoration: none;
-            transition: all 0.2s;
-            font-size: 1.2rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .social-link:hover {
-            background: #374151;
-            color: #ffffff;
-            border-color: #4f46e5;
-        }
-
-        .content-area {
-            padding: 2rem;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        /* Home Screen Styles */
-        .home-screen {
-            display: none;
-        }
-
-        .home-screen.active {
-            display: block;
-        }
-
-        .hero-section {
-            text-align: center;
-            margin-bottom: 4rem;
-        }
-
-        .hero-title {
-            font-size: 3rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-            background: linear-gradient(45deg, #4f46e5, #7c3aed);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .hero-subtitle {
-            font-size: 1.2rem;
-            color: #9ca3af;
-            margin-bottom: 2rem;
-        }
-
-        .cta-button {
-            background: #4f46e5;
-            color: white;
-            padding: 1rem 2rem;
-            border: none;
-            border-radius: 8px;
-            font-size: 1.1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: background 0.2s;
-        }
-
-        .cta-button:hover {
-            background: #4338ca;
-        }
-
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-bottom: 4rem;
-        }
-
-        .feature-card {
-            background: #111827;
-            border: 1px solid #1f2937;
-            border-radius: 12px;
-            padding: 2rem;
-        }
-
-        .feature-icon {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-        }
-
-        .feature-title {
-            font-size: 1.3rem;
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-        }
-
-        .feature-desc {
-            color: #9ca3af;
+            font-family: Arial, sans-serif;
+            background-color: white;
+            margin: 0;
+            padding: 20px;
             line-height: 1.6;
         }
-
-        .stats-section {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 2rem;
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
         }
-
-        .stat-card {
-            background: #111827;
-            border: 1px solid #1f2937;
-            border-radius: 12px;
-            padding: 2rem;
+        
+        .header {
             text-align: center;
+            margin-bottom: 40px;
         }
-
-        .stat-number {
-            font-size: 2.5rem;
-            font-weight: 700;
-            color: #10b981;
-            margin-bottom: 0.5rem;
-        }
-
-        .stat-label {
-            color: #9ca3af;
-            text-transform: uppercase;
-            font-size: 0.9rem;
-            font-weight: 500;
-        }
-
-        /* Screener Styles */
-        .screener-screen {
-            display: none;
-        }
-
-        .screener-screen.active {
-            display: block;
-        }
-
-        .search-section {
-            text-align: center;
-            margin-bottom: 3rem;
-        }
-
-        .search-title {
-            font-size: 2rem;
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-            color: #ffffff;
-        }
-
-        .search-subtitle {
-            color: #9ca3af;
-            margin-bottom: 2rem;
-            font-size: 1rem;
-        }
-
-        .search-container {
+        
+        .logo {
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            margin: 0 auto 20px;
             display: flex;
-            gap: 0.5rem;
-            max-width: 500px;
-            margin: 0 auto 2rem auto;
-        }
-
-        .search-input {
-            flex: 1;
-            padding: 0.75rem 1rem;
-            background: #1a1d21;
-            border: 1px solid #2d3748;
-            border-radius: 8px;
-            color: #ffffff;
-            font-size: 1rem;
-            outline: none;
-        }
-
-        .search-input::placeholder {
-            color: #6b7280;
-        }
-
-        .search-input:focus {
-            border-color: #4f46e5;
-        }
-
-        .search-btn {
-            padding: 0.75rem 1.5rem;
-            background: #4f46e5;
-            color: white;
-            border: none;
-            border-radius: 8px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: background 0.2s;
-        }
-
-        .search-btn:hover {
-            background: #4338ca;
-        }
-
-        .popular-stocks {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
+            align-items: center;
             justify-content: center;
+            position: relative;
+        }
+        
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            background: #333;
+            border-radius: 8px;
+            display: flex;
             align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 20px;
+            text-decoration: none;
+            transition: background 0.3s ease;
         }
-
-        .popular-label {
-            color: #9ca3af;
-            margin-right: 1rem;
-            font-size: 0.9rem;
+        
+        .social-icon:hover {
+            background: #555;
         }
-
-        .stock-tag {
-            padding: 0.5rem 1rem;
-            background: #1a1d21;
-            border: 1px solid #2d3748;
-            border-radius: 6px;
-            color: #e5e7eb;
-            cursor: pointer;
-            font-size: 0.9rem;
-            font-weight: 500;
-            transition: all 0.2s;
+        
+        .github-icon {
+            background: #000;
         }
-
-        .stock-tag:hover {
-            background: #374151;
-            border-color: #4f46e5;
+        
+        .x-icon {
+            background: #000;
         }
-
-        .results-section {
-            display: none;
-        }
-
-        .match-card {
-            background: #111827;
-            border: 1px solid #1f2937;
-            border-radius: 12px;
-            padding: 2rem;
-            margin-bottom: 2rem;
-        }
-
-        .comparison {
+        
+        .content-layout {
             display: grid;
-            grid-template-columns: 1fr auto 1fr;
-            gap: 2rem;
+            grid-template-columns: 400px 1fr 400px;
+            gap: 30px;
+            align-items: start;
+        }
+        
+        .social-post {
+            margin-bottom: 20px;
+            display: flex;
             align-items: center;
-            margin-bottom: 2rem;
-        }
-
-        .stock-side, .memecoin-side {
-            text-align: center;
-            padding: 1.5rem;
-            background: #1a1d21;
-            border-radius: 8px;
-        }
-
-        .vs-divider {
-            color: #6b7280;
-            font-size: 1.5rem;
-            font-weight: 700;
-        }
-
-        .symbol {
-            font-size: 1.8rem;
-            font-weight: 700;
-            margin-bottom: 0.5rem;
-        }
-
-        .company-name {
-            color: #9ca3af;
-            margin-bottom: 1rem;
-            font-size: 1rem;
-        }
-
-        .platform {
-            font-size: 0.9rem;
-            color: #6b7280;
-        }
-
-        .description {
-            color: #9ca3af;
-            line-height: 1.5;
-        }
-
-        .explanation {
-            background: #1a1d21;
-            padding: 1.5rem;
-            border-radius: 8px;
-            margin-bottom: 2rem;
-        }
-
-        .explanation h3 {
-            color: #4f46e5;
-            margin-bottom: 0.5rem;
-            font-size: 1.1rem;
-        }
-
-        .stats {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-            gap: 1rem;
-        }
-
-        .stat {
-            background: #1a1d21;
-            padding: 1rem;
-            border-radius: 8px;
+            justify-content: center;
             text-align: center;
         }
-
-        .stat-value {
-            font-size: 1.3rem;
-            font-weight: 700;
-            color: #10b981;
-            margin-bottom: 0.3rem;
+        
+        .center-content {
+            text-align: center;
+            padding: 0 20px;
         }
-
-        .stat-label {
-            color: #9ca3af;
-            font-size: 0.8rem;
+        
+        .project-title {
+            color: black;
+            font-size: 36px;
+            font-weight: bold;
+            margin-bottom: 20px;
             text-transform: uppercase;
-            font-weight: 500;
         }
-
-        .no-results {
+        
+        .project-description {
+            color: black;
+            font-size: 16px;
+            margin-bottom: 40px;
+        }
+        
+        .main-text {
+            color: black;
+            font-size: 18px;
+            font-weight: bold;
+            text-transform: uppercase;
+            line-height: 1.8;
+            margin: 40px 0;
+        }
+        
+        .code-block {
+            margin-top: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             text-align: center;
-            padding: 3rem;
         }
-
-        .no-results h3 {
-            font-size: 1.5rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .no-results p {
-            color: #9ca3af;
-        }
-
-        @media (max-width: 768px) {
-            body {
-                flex-direction: column;
-            }
-
-            .sidebar {
-                width: 100%;
-                padding: 1rem 0;
-                order: 2;
-                border-right: none;
-                border-top: 1px solid #1f2937;
-            }
-
-            .main-content {
-                order: 1;
-            }
-
-            .header {
-                padding: 1rem 1.5rem;
-            }
-
-            .header-title {
-                font-size: 1.3rem;
-            }
-
-            .social-link {
-                padding: 0.6rem;
-                font-size: 1rem;
-            }
-
-            .comparison {
+        
+        @media (max-width: 1200px) {
+            .content-layout {
                 grid-template-columns: 1fr;
-                gap: 1rem;
+                gap: 20px;
             }
             
-            .vs-divider {
-                transform: rotate(90deg);
-            }
-
-            .hero-title {
-                font-size: 2rem;
-            }
-
-            .search-container {
-                flex-direction: column;
-            }
-
-            .popular-stocks {
-                flex-direction: column;
-                align-items: stretch;
-            }
-
-            .popular-label {
-                margin-right: 0;
-                margin-bottom: 0.5rem;
+            .social-post {
+                max-width: 400px;
+                margin: 10px auto;
             }
         }
     </style>
 </head>
 <body>
-    <div class="sidebar">
-        <div class="logo">
-            <div class="logo-text">📈 stockscreener</div>
-        </div>
-        
-        <button class="nav-item active" onclick="showScreen('home')">
-            <span class="nav-icon">🏠</span>
-            <span>home</span>
-        </button>
-        
-        <button class="nav-item" onclick="showScreen('screener')">
-            <span class="nav-icon">🔍</span>
-            <span>screener</span>
-        </button>
-        
-        <button class="nav-item" onclick="showScreen('portfolio')" style="cursor: pointer;">
-            <span class="nav-icon">💼</span>
-            <span>portfolio</span>
-        </button>
-        
-        <button class="nav-item" onclick="showScreen('about')">
-            <span class="nav-icon">ℹ️</span>
-            <span>about</span>
-        </button>
+<div class="social-links">
+        </a>
+        <a href="https://x.com/ThePFStock" target="_blank" class="social-icon x-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+            </svg>
+        </a>
     </div>
-
-    <div class="main-content">
+    <div class="container">
         <div class="header">
-            <div class="header-title" id="headerTitle">welcome</div>
-            <a href="https://x.com/StockScreeners_" target="_blank" class="social-link" title="Follow us on X">
-                𝕏
-            </a>
+                <div class="logo">
+                    <img src="pfp.jpg" alt="" style="width: 100%; height: auto; border-radius: 8px;">
+                </div>
         </div>
-
-        <div class="content-area">
-            <!-- Home Screen -->
-            <div id="homeScreen" class="home-screen active">
-                <div class="hero-section">
-                    <h1 class="hero-title">stockscreener</h1>
-                    <p class="hero-subtitle">discover solana memecoins that mirror your favorite traditional stocks</p>
-                    <button class="cta-button" onclick="showScreen('screener')">start screening</button>
-                </div>
-
-                <div class="features-grid">
-                    <div class="feature-card">
-                        <div class="feature-icon">🎯</div>
-                        <h3 class="feature-title">perfect matches</h3>
-                        <p class="feature-desc">find memecoins that capture the same energy and innovation as traditional stocks</p>
-                    </div>
-                    
-                    <div class="feature-card">
-                        <div class="feature-icon">⚡</div>
-                        <h3 class="feature-title">solana powered</h3>
-                        <p class="feature-desc">all memecoins are native to the fast and efficient solana blockchain</p>
-                    </div>
-                    
-                    <div class="feature-card">
-                        <div class="feature-icon">📊</div>
-                        <h3 class="feature-title">real metrics</h3>
-                        <p class="feature-desc">comprehensive data on market caps, compatibility scores, and vibes</p>
-                    </div>
-                </div>
-
-                <div class="stats-section">
-                    <div class="stat-card">
-                        <div class="stat-number">8</div>
-                        <div class="stat-label">stock matches</div>
-                    </div>
-                    
-                    <div class="stat-card">
-                        <div class="stat-number">$12.4M</div>
-                        <div class="stat-label">total market cap</div>
-                    </div>
-                    
-                    <div class="stat-card">
-                        <div class="stat-number">100%</div>
-                        <div class="stat-label">compatibility</div>
-                    </div>
-                    
-                    <div class="stat-card">
-                        <div class="stat-number">SOL</div>
-                        <div class="stat-label">network</div>
-                    </div>
+        
+        <div class="content-layout">
+            <div class="left-posts">
+                <div class="social-post">
+                    <img src="social-post-1.png" alt="Social Post 1" style="width: 100%; height: auto; border-radius: 8px;">
                 </div>
             </div>
-
-            <!-- Screener Screen -->
-            <div id="screenerScreen" class="screener-screen">
-                <div class="search-section">
-                    <h1 class="search-title">find memecoin equivalents</h1>
-                    <p class="search-subtitle">discover the solana memecoin version of your favorite stocks</p>
-                    
-                    <div class="search-container">
-                        <input type="text" class="search-input" placeholder="enter stock symbol (TSLA, AAPL, NVDA...)" id="stockInput">
-                        <button class="search-btn" onclick="searchStock()">search</button>
-                    </div>
-                    
-                    <div class="popular-stocks">
-                        <span class="popular-label">popular:</span>
-                        <div class="stock-tag" onclick="quickSearch('TSLA')">TSLA</div>
-                        <div class="stock-tag" onclick="quickSearch('AAPL')">AAPL</div>
-                        <div class="stock-tag" onclick="quickSearch('NVDA')">NVDA</div>
-                        <div class="stock-tag" onclick="quickSearch('AMZN')">AMZN</div>
-                        <div class="stock-tag" onclick="quickSearch('META')">META</div>
-                        <div class="stock-tag" onclick="quickSearch('GOOGL')">GOOGL</div>
-                        <div class="stock-tag" onclick="quickSearch('MSFT')">MSFT</div>
-                        <div class="stock-tag" onclick="quickSearch('NFLX')">NFLX</div>
-                    </div>
+            
+            <div class="center-content">
+                <div class="project-title">
+                    What is Pamp?
                 </div>
-
-                <div class="results-section" id="resultsSection">
-                    <div id="matchContent"></div>
+                <div class="project-description">
+                    • The official Stock Of Pumpfun<br><br>
+                    • "pamp" has always been mentioned as a joke by pumpfun so we made it real.<br><br>
+                    • it acts as the only stock coin from the actual pumpfun no one has actually done properly yet.
                 </div>
             </div>
-
-            <!-- Other Screens -->
-            <div id="portfolioScreen" class="screen" style="display: none;">
-                <div style="text-align: center; padding: 4rem;">
-                    <div style="max-width: 500px; margin: 0 auto;">
-                        <h2 style="font-size: 2rem; margin-bottom: 1rem;">your portfolio</h2>
-                        <p style="color: #9ca3af; margin-bottom: 3rem; line-height: 1.6;">
-                            connect your solana wallet to view your memecoin holdings and track performance
-                        </p>
-                        
-                        <div id="walletSection">
-                            <button class="cta-button" onclick="connectWallet()" style="margin-bottom: 2rem;">
-                                🔗 connect solana wallet
-                            </button>
-                            
-                            <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
-                                <div style="background: #111827; border: 1px solid #1f2937; border-radius: 8px; padding: 1rem; min-width: 100px;">
-                                    <div style="font-size: 1.1rem; font-weight: 600; margin-bottom: 0.5rem;">phantom</div>
-                                    <div style="color: #9ca3af; font-size: 0.9rem;">recommended</div>
-                                </div>
-                                <div style="background: #111827; border: 1px solid #1f2937; border-radius: 8px; padding: 1rem; min-width: 100px;">
-                                    <div style="font-size: 1.1rem; font-weight: 600; margin-bottom: 0.5rem;">solflare</div>
-                                    <div style="color: #9ca3af; font-size: 0.9rem;">popular</div>
-                                </div>
-                                <div style="background: #111827; border: 1px solid #1f2937; border-radius: 8px; padding: 1rem; min-width: 100px;">
-                                    <div style="font-size: 1.1rem; font-weight: 600; margin-bottom: 0.5rem;">backpack</div>
-                                    <div style="color: #9ca3af; font-size: 0.9rem;">new</div>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div id="connectedWallet" style="display: none;">
-                            <div style="background: #111827; border: 1px solid #1f2937; border-radius: 12px; padding: 2rem; margin-bottom: 2rem;">
-                                <div style="color: #10b981; margin-bottom: 1rem;">✅ wallet connected</div>
-                                <div style="font-family: monospace; color: #9ca3af; font-size: 0.9rem;" id="walletAddress"></div>
-                                <button onclick="disconnectWallet()" style="background: #374151; color: white; border: none; padding: 0.5rem 1rem; border-radius: 6px; margin-top: 1rem; cursor: pointer;">disconnect</button>
-                            </div>
-                            
-                            <div style="text-align: left;">
-                                <h3 style="margin-bottom: 1rem;">your memecoin holdings</h3>
-                                <div style="color: #9ca3af; padding: 2rem; background: #111827; border-radius: 8px;">
-                                    no memecoin holdings found. start by searching for your favorite stocks in the screener!
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+            
+            <div class="right-posts">
+                <div class="social-post">
+                    <img src="social-post-4.png" alt="Social Post 4" style="width: 100%; height: auto; border-radius: 8px;">
                 </div>
             </div>
-
-            <div id="aboutScreen" class="screen" style="display: none;">
-                <div style="text-align: center; padding: 4rem;">
-                    <h2 style="font-size: 2rem; margin-bottom: 1rem;">about stockscreener</h2>
-                    <p style="color: #9ca3af; max-width: 600px; margin: 0 auto; line-height: 1.6;">
-                        stockscreener helps you discover solana memecoins that mirror the innovation and energy of traditional stocks. 
-                        each memecoin captures the essence of its stock counterpart, bringing familiar companies into the decentralized world.
-                    </p>
-                </div>
+        </div>
+        
+        <div class="bottom-section" style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-top: 40px; align-items: start;">
+            <div class="main-text">
+                Pamp Lore<br>
+                Created as a joke by alon in 2024, pamp is the official meme stock we have tokenized, once we hit 1b we will file as an actual company to list our memecoin as an actual stock 
             </div>
-            <div id="aboutScreen" class="screen" style="display: none;">
-                <div style="text-align: center; padding: 4rem;">
-                    <h2 style="font-size: 2rem; margin-bottom: 1rem;">about stockscreener</h2>
-                    <p style="color: #9ca3af; max-width: 600px; margin: 0 auto; line-height: 1.6;">
-                        stockscreener helps you discover solana memecoins that mirror the innovation and energy of traditional stocks. 
-                        each memecoin captures the essence of its stock counterpart, bringing familiar companies into the decentralized world.
-                    </p>
-                </div>
+            
+            <div class="code-block">
+                <img src="code-snippet.png" alt="Code Snippet" style="width: 100%; height: auto; border-radius: 8px;">
             </div>
         </div>
     </div>
-
-    <script>
-        const stockMemecoinData = {
-            'TSLA': {
-                stock: { name: 'Tesla Inc.', symbol: 'TSLA' },
-                memecoin: { 
-                    name: 'Tesla', 
-                    symbol: 'TESLA',
-                    description: 'electric vehicle memecoin celebrating sustainable transportation innovation'
-                },
-                reason: 'the solana memecoin version of tesla, capturing the same electric energy and revolutionary spirit of sustainable transportation.',
-                compatibility: '100%',
-                vibeScore: '⚡⚡⚡⚡⚡',
-                marketCap: '$1.8M'
-            },
-            'AAPL': {
-                stock: { name: 'Apple Inc.', symbol: 'AAPL' },
-                memecoin: { 
-                    name: 'Apple', 
-                    symbol: 'APPLE',
-                    description: 'premium tech memecoin representing innovation and sleek design'
-                },
-                reason: 'the memecoin equivalent of apple on solana, embodying the same premium quality and innovative design philosophy.',
-                compatibility: '100%',
-                vibeScore: '🍎🍎🍎🍎🍎',
-                marketCap: '$1.5M'
-            },
-            'NVDA': {
-                stock: { name: 'NVIDIA Corporation', symbol: 'NVDA' },
-                memecoin: { 
-                    name: 'NVIDIA', 
-                    symbol: 'NVDA',
-                    description: 'AI and graphics processing memecoin powering the future of computing'
-                },
-                reason: 'nvidia memecoin on solana representing the same cutting-edge graphics and AI technology leadership.',
-                compatibility: '100%',
-                vibeScore: '🎮🎮🎮🎮🎮',
-                marketCap: '$1.9M'
-            },
-            'AMZN': {
-                stock: { name: 'Amazon.com Inc.', symbol: 'AMZN' },
-                memecoin: { 
-                    name: 'Amazon', 
-                    symbol: 'AMZN',
-                    description: 'e-commerce giant memecoin delivering everything to everyone'
-                },
-                reason: 'amazon memecoin on solana capturing the same global marketplace dominance and customer-first approach.',
-                compatibility: '100%',
-                vibeScore: '📦📦📦📦📦',
-                marketCap: '$1.2M'
-            },
-            'META': {
-                stock: { name: 'Meta Platforms Inc.', symbol: 'META' },
-                memecoin: { 
-                    name: 'Meta', 
-                    symbol: 'META',
-                    description: 'social media and metaverse memecoin connecting digital communities'
-                },
-                reason: 'meta memecoin on solana representing the same vision of connecting people through digital platforms and virtual reality.',
-                compatibility: '100%',
-                vibeScore: '🌐🌐🌐🌐🌐',
-                marketCap: '$1.4M'
-            },
-            'GOOGL': {
-                stock: { name: 'Alphabet Inc.', symbol: 'GOOGL' },
-                memecoin: { 
-                    name: 'Google', 
-                    symbol: 'GOOGL',
-                    description: 'search and information memecoin organizing the worlds knowledge'
-                },
-                reason: 'google memecoin on solana embodying the same mission of organizing information and making it universally accessible.',
-                compatibility: '100%',
-                vibeScore: '🔍🔍🔍🔍🔍',
-                marketCap: '$1.6M'
-            },
-            'MSFT': {
-                stock: { name: 'Microsoft Corporation', symbol: 'MSFT' },
-                memecoin: { 
-                    name: 'Microsoft', 
-                    symbol: 'MSFT',
-                    description: 'enterprise software memecoin empowering productivity and cloud computing'
-                },
-                reason: 'microsoft memecoin on solana representing the same enterprise leadership and cloud computing innovation.',
-                compatibility: '100%',
-                vibeScore: '💻💻💻💻💻',
-                marketCap: '$1.7M'
-            },
-            'NFLX': {
-                stock: { name: 'Netflix Inc.', symbol: 'NFLX' },
-                memecoin: { 
-                    name: 'Netflix', 
-                    symbol: 'NFLX',
-                    description: 'streaming entertainment memecoin delivering content to global audiences'
-                },
-                reason: 'netflix memecoin on solana capturing the same entertainment streaming revolution and content creation leadership.',
-                compatibility: '100%',
-                vibeScore: '🎬🎬🎬🎬🎬',
-                marketCap: '$1.3M'
-            }
-        };
-
-        function showScreen(screenName) {
-            console.log('Showing screen:', screenName); // Debug log
-            
-            // Hide all screens
-            document.querySelectorAll('.home-screen, .screener-screen, .screen').forEach(screen => {
-                screen.style.display = 'none';
-                screen.classList.remove('active');
-            });
-
-            // Remove active class from all nav items
-            document.querySelectorAll('.nav-item').forEach(item => {
-                item.classList.remove('active');
-            });
-
-            // Show selected screen and activate nav item
-            const screenMap = {
-                'home': { element: 'homeScreen', title: 'welcome', navIndex: 0 },
-                'screener': { element: 'screenerScreen', title: 'stock screener', navIndex: 1 },
-                'portfolio': { element: 'portfolioScreen', title: 'portfolio', navIndex: 2 }
-            };
-
-            const screen = screenMap[screenName];
-            if (screen) {
-                const element = document.getElementById(screen.element);
-                console.log('Found element:', element); // Debug log
-                if (element) {
-                    element.style.display = 'block';
-                    element.classList.add('active');
-                }
-                document.getElementById('headerTitle').textContent = screen.title;
-                document.querySelectorAll('.nav-item')[screen.navIndex].classList.add('active');
-            } else {
-                console.log('Screen not found in map:', screenName); // Debug log
-            }
-        }
-
-        function searchStock() {
-            const input = document.getElementById('stockInput').value.toUpperCase().trim();
-            if (input) {
-                displayMatch(input);
-            }
-        }
-
-        function quickSearch(symbol) {
-            document.getElementById('stockInput').value = symbol;
-            displayMatch(symbol);
-        }
-
-        function displayMatch(symbol) {
-            const resultsSection = document.getElementById('resultsSection');
-            const matchContent = document.getElementById('matchContent');
-            
-            if (stockMemecoinData[symbol]) {
-                const data = stockMemecoinData[symbol];
-                matchContent.innerHTML = `
-                    <div class="match-card">
-                        <div class="comparison">
-                            <div class="stock-side">
-                                <div class="symbol">${data.stock.symbol}</div>
-                                <div class="company-name">${data.stock.name}</div>
-                                <div class="platform">traditional stock market</div>
-                            </div>
-                            
-                            <div class="vs-divider">↔</div>
-                            
-                            <div class="memecoin-side">
-                                <div class="symbol">${data.memecoin.symbol}</div>
-                                <div class="company-name">${data.memecoin.name}</div>
-                                <div class="platform">solana memecoin</div>
-                            </div>
-                        </div>
-                        
-                        <div class="explanation">
-                            <h3>memecoin equivalent</h3>
-                            <p class="description">${data.reason}</p>
-                        </div>
-                        
-                        <div class="stats">
-                            <div class="stat">
-                                <div class="stat-value">${data.compatibility}</div>
-                                <div class="stat-label">match</div>
-                            </div>
-                            <div class="stat">
-                                <div class="stat-value">${data.vibeScore}</div>
-                                <div class="stat-label">vibe</div>
-                            </div>
-                            <div class="stat">
-                                <div class="stat-value">${data.marketCap}</div>
-                                <div class="stat-label">market cap</div>
-                            </div>
-                            <div class="stat">
-                                <div class="stat-value">SOL</div>
-                                <div class="stat-label">network</div>
-                            </div>
-                        </div>
-                    </div>
-                `;
-                
-                resultsSection.style.display = 'block';
-                resultsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            } else {
-                matchContent.innerHTML = `
-                    <div class="match-card">
-                        <div class="no-results">
-                            <h3>no memecoin found</h3>
-                            <p>this stock doesn't have a memecoin equivalent on solana yet. try one of the popular stocks above.</p>
-                        </div>
-                    </div>
-                `;
-                resultsSection.style.display = 'block';
-                resultsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            }
-        }
-
-        // Enter key search
-        document.getElementById('stockInput').addEventListener('keypress', function(event) {
-            if (event.key === 'Enter') {
-                searchStock();
-            }
-        });
-
-        // Add click event listeners to nav items as backup
-        document.addEventListener('DOMContentLoaded', function() {
-            const navItems = document.querySelectorAll('.nav-item');
-            navItems.forEach((item, index) => {
-                item.addEventListener('click', function(e) {
-                    console.log('Nav item clicked, index:', index);
-                    switch(index) {
-                        case 0: showScreen('home'); break;
-                        case 1: showScreen('screener'); break;
-                        case 2: showScreen('portfolio'); break;
-                    }
-                });
-            });
-        });
-    </script>
 </body>
 </html>
