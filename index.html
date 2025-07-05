@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>launchpads - Create Your Meme Coin</title>
+    <title>No Pets</title>
     <style>
         * {
             margin: 0;
@@ -12,832 +12,1263 @@
         }
 
         body {
-            background: linear-gradient(135deg, #0f1419 0%, #1a1f2e 100%);
-            color: #ffffff;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
-        }
-
-        .navbar {
-            background: rgba(0, 0, 0, 0.3);
-            backdrop-filter: blur(10px);
-            padding: 1rem 2rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .logo {
-            font-size: 1.5rem;
-            font-weight: bold;
-            background: linear-gradient(45deg, #00d4aa, #00a8ff);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 2rem;
-            list-style: none;
-        }
-
-        .nav-links a {
-            color: #ffffff;
-            text-decoration: none;
-            transition: color 0.3s;
-        }
-
-        .nav-links a:hover {
-            color: #00d4aa;
-        }
-
-        .x-link {
-            background: linear-gradient(45deg, #00d4aa, #00a8ff);
-            padding: 0.4rem 0.8rem;
-            border-radius: 8px;
-            font-weight: bold;
-            font-size: 1.1rem;
-            transition: all 0.3s;
-            text-decoration: none !important;
-        }
-
-        .x-link:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0, 212, 170, 0.3);
-            color: white !important;
-        }
-
-        .wallet-btn {
-            background: linear-gradient(45deg, #00d4aa, #00a8ff);
-            border: none;
-            padding: 0.5rem 1rem;
-            border-radius: 8px;
-            color: white;
-            cursor: pointer;
-            font-weight: 500;
-            transition: transform 0.2s;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            min-width: 140px;
-            justify-content: center;
-        }
-
-        .wallet-btn:hover {
-            transform: translateY(-2px);
-        }
-
-        .wallet-btn.connected {
-            background: linear-gradient(45deg, #2ecc71, #27ae60);
-        }
-
-        .wallet-btn.connecting {
-            background: linear-gradient(45deg, #f39c12, #e67e22);
-            cursor: not-allowed;
-        }
-
-        .wallet-address {
-            font-family: monospace;
-            font-size: 0.9rem;
-        }
-
-        .wallet-status {
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            background: #2ecc71;
-            display: inline-block;
+            padding: 20px;
         }
 
         .container {
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
-            padding: 2rem;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 3rem;
+            background: rgba(255, 255, 255, 0.98);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
         }
 
-        .form-section {
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 16px;
-            padding: 2rem;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+        h1 {
+            text-align: center;
+            color: #2d3748;
+            font-size: 2.2em;
+            margin-bottom: 8px;
         }
 
+        .subtitle {
+            text-align: center;
+            color: #718096;
+            margin-bottom: 25px;
+            font-size: 1em;
+        }
+
+        .main-layout {
+            display: flex;
+            gap: 30px;
+            align-items: flex-start;
+        }
+
+        /* Preview Section */
         .preview-section {
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 16px;
-            padding: 2rem;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            height: fit-content;
+            flex: 0 0 350px;
+            position: sticky;
+            top: 20px;
         }
 
-        .section-title {
-            font-size: 1.5rem;
-            margin-bottom: 1.5rem;
-            background: linear-gradient(45deg, #00d4aa, #00a8ff);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+        .avatar-preview {
+            width: 350px;
+            height: 350px;
+            background: #e6f3ff;
+            border-radius: 20px;
+            position: relative;
+            overflow: visible; /* Changed from hidden */
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            margin-bottom: 20px;
         }
 
-        .form-group {
-            margin-bottom: 1.5rem;
+        .cat-base {
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 350px;
+            height: 350px;
         }
 
-        label {
-            display: block;
-            margin-bottom: 0.5rem;
-            color: #b3b3b3;
-            font-weight: 500;
-        }
-
-        input, textarea, select {
-            width: 100%;
-            padding: 0.75rem;
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 8px;
-            color: #ffffff;
-            font-size: 1rem;
-            transition: border-color 0.3s;
-        }
-
-        input:focus, textarea:focus, select:focus {
-            outline: none;
-            border-color: #00d4aa;
-        }
-
-        textarea {
-            resize: vertical;
-            min-height: 100px;
-        }
-
-        .upload-area {
-            border: 2px dashed rgba(255, 255, 255, 0.3);
-            border-radius: 12px;
-            padding: 3rem 2rem;
-            text-align: center;
-            cursor: pointer;
-            transition: all 0.3s;
-            margin: 1rem 0;
-        }
-
-        .upload-area:hover {
-            border-color: #00d4aa;
-            background: rgba(0, 212, 170, 0.1);
-        }
-
-        .upload-icon {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-            opacity: 0.5;
-        }
-
-        .file-input {
-            display: none;
-        }
-
-        .platform-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 1rem;
-            margin: 1rem 0;
-        }
-
-        .platform-card {
-            background: rgba(255, 255, 255, 0.1);
-            border: 2px solid transparent;
-            border-radius: 12px;
-            padding: 1rem;
-            cursor: pointer;
-            transition: all 0.3s;
-            text-align: center;
-        }
-
-        .platform-card:hover {
-            border-color: #00d4aa;
-            transform: translateY(-2px);
-        }
-
-        .platform-card.selected {
-            border-color: #00d4aa;
-            background: rgba(0, 212, 170, 0.2);
-        }
-
-        .platform-logo {
-            width: 40px;
-            height: 40px;
-            margin: 0 auto 0.5rem;
-            background: linear-gradient(45deg, #00d4aa, #00a8ff);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-        }
-
-        .launch-btn {
-            width: 100%;
-            background: linear-gradient(45deg, #00d4aa, #00a8ff);
-            border: none;
-            padding: 1rem 2rem;
-            border-radius: 12px;
-            color: white;
-            font-size: 1.1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s;
-            margin-top: 2rem;
-        }
-
-        .launch-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 30px rgba(0, 212, 170, 0.3);
-        }
-
-        .launch-btn:disabled {
-            opacity: 0.5;
-            cursor: not-allowed;
-            transform: none;
-        }
-
-        .preview-card {
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 12px;
-            padding: 1.5rem;
-            text-align: center;
-        }
-
-        .preview-image {
-            width: 80px;
-            height: 80px;
-            background: rgba(255, 255, 255, 0.2);
-            border-radius: 50%;
-            margin: 0 auto 1rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2rem;
-        }
-
-        .file-specs {
-            font-size: 0.8rem;
-            color: #888;
-            margin-top: 0.5rem;
-        }
-
-        .success-popup {
-            position: fixed;
-            top: 0;
-            left: 0;
+        .cat-base img {
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.8);
-            display: none;
-            align-items: center;
-            justify-content: center;
-            z-index: 1000;
+            object-fit: contain;
+            object-position: center 10%;
         }
 
-        .popup-content {
-            background: linear-gradient(135deg, #1a1f2e, #0f1419);
-            padding: 2rem;
-            border-radius: 16px;
-            text-align: center;
-            max-width: 400px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+        /* Controls Section */
+        .controls-section {
+            flex: 1;
+            max-height: 600px;
+            overflow-y: auto;
+            padding-right: 10px;
         }
 
-        .popup-icon {
-            font-size: 3rem;
-            color: #00d4aa;
-            margin-bottom: 1rem;
+        .controls-section::-webkit-scrollbar {
+            width: 8px;
         }
 
-        .docs-container {
-            max-width: 1000px;
-            margin: 0 auto;
-            padding: 2rem;
+        .controls-section::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 10px;
         }
 
-        .docs-content {
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 16px;
-            padding: 3rem;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+        .controls-section::-webkit-scrollbar-thumb {
+            background: #cbd5e0;
+            border-radius: 10px;
         }
 
-        .docs-title {
-            font-size: 2.5rem;
-            margin-bottom: 2rem;
-            text-align: center;
-            background: linear-gradient(45deg, #00d4aa, #00a8ff);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+        .controls-section::-webkit-scrollbar-thumb:hover {
+            background: #a0aec0;
         }
 
-        .docs-card {
-            background: rgba(255, 255, 255, 0.05);
+        .category {
+            background: #f7fafc;
+            padding: 20px;
             border-radius: 12px;
-            padding: 2rem;
-            margin-bottom: 2rem;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            margin-bottom: 20px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
         }
 
-        .docs-card h2 {
-            color: #00d4aa;
-            margin-bottom: 1rem;
-            font-size: 1.5rem;
+        .category-title {
+            font-weight: 600;
+            color: #2d3748;
+            margin-bottom: 12px;
+            font-size: 1.1em;
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
 
-        .docs-card h3 {
-            color: #00a8ff;
-            margin: 1.5rem 0 0.5rem 0;
-            font-size: 1.2rem;
+        .options-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+            gap: 8px;
         }
 
-        .docs-card p {
-            line-height: 1.6;
-            margin-bottom: 1rem;
-            color: #b3b3b3;
-        }
-
-        .docs-card ul, .docs-card ol {
-            margin: 1rem 0;
-            padding-left: 1.5rem;
-            color: #b3b3b3;
-        }
-
-        .docs-card li {
-            margin-bottom: 0.5rem;
-            line-height: 1.5;
-        }
-
-        .platform-docs {
-            margin: 1.5rem 0;
-            padding: 1rem;
-            background: rgba(255, 255, 255, 0.03);
+        .option-btn {
+            padding: 10px;
+            border: 2px solid #e2e8f0;
+            background: white;
             border-radius: 8px;
-            border-left: 3px solid #00d4aa;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-size: 13px;
+            text-align: center;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
 
-        .platform-docs h3 {
-            margin-top: 0;
+        .option-btn:hover {
+            background: #5a67d8;
+            color: white;
+            transform: translateY(-1px);
+            border-color: #5a67d8;
         }
+
+        .option-btn.active {
+            background: #5a67d8;
+            color: white;
+            border-color: #5a67d8;
+        }
+
+        /* Color grid for backgrounds */
+        .color-grid {
+            display: grid;
+            grid-template-columns: repeat(8, 1fr);
+            gap: 8px;
+        }
+
+        .color-btn {
+            width: 100%;
+            padding-bottom: 100%;
+            border: 3px solid transparent;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            position: relative;
+        }
+
+        .color-btn:hover {
+            transform: scale(1.1);
+            border-color: #4a5568;
+        }
+
+        .color-btn.active {
+            border-color: #5a67d8;
+            box-shadow: 0 0 0 2px rgba(90, 103, 216, 0.3);
+        }
+
+        /* Action buttons */
+        .action-buttons {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            margin-top: 20px;
+        }
+
+        .action-btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 30px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-transform: uppercase;
+        }
+
+        .download-btn {
+            background: #48bb78;
+            color: white;
+        }
+
+        .download-btn:hover {
+            background: #38a169;
+            transform: translateY(-2px);
+        }
+
+        .random-btn {
+            background: #ed8936;
+            color: white;
+        }
+
+        .random-btn:hover {
+            background: #dd6b20;
+            transform: translateY(-2px);
+        }
+
+        .reset-btn {
+            background: #e53e3e;
+            color: white;
+        }
+
+        .reset-btn:hover {
+            background: #c53030;
+            transform: translateY(-2px);
+        }
+
+        /* Accessory Styles */
+        .accessory {
+            position: absolute;
+            pointer-events: none;
+            transition: all 0.3s ease;
+        }
+
+        /* Hats */
+        .hat-none { display: none; }
+
+        .hat-cap {
+            width: 120px;
+            height: 60px;
+            background: #e53e3e;
+            border-radius: 50% 50% 0 0;
+            top: 150px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .hat-cap::after {
+            content: '';
+            position: absolute;
+            width: 150px;
+            height: 18px;
+            background: #c53030;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 50%;
+        }
+
+        .hat-wizard {
+            width: 0;
+            height: 0;
+            border-left: 50px solid transparent;
+            border-right: 50px solid transparent;
+            border-bottom: 100px solid #9f7aea;
+            top: 120px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .hat-crown {
+            width: 110px;
+            height: 60px;
+            background: #ffd700;
+            top: 140px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .hat-crown::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 35px;
+            background: inherit;
+            top: -18px;
+            clip-path: polygon(0 100%, 20% 0, 40% 100%, 60% 0, 80% 100%, 100% 0, 100% 100%);
+        }
+
+        .hat-beanie {
+            width: 110px;
+            height: 70px;
+            background: #4a5568;
+            border-radius: 50% 50% 30% 30%;
+            top: 45px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .hat-tophat {
+            width: 100px;
+            height: 80px;
+            background: #1a202c;
+            top: 35px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .hat-tophat::after {
+            content: '';
+            position: absolute;
+            width: 140px;
+            height: 18px;
+            background: #1a202c;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .hat-bandana {
+            width: 120px;
+            height: 50px;
+            background: #e53e3e;
+            top: 55px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 50% 50% 0 0;
+            overflow: hidden;
+        }
+
+        .hat-bandana::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 12px;
+            background: repeating-linear-gradient(90deg, white 0, white 6px, transparent 6px, transparent 12px);
+            bottom: 5px;
+        }
+
+        /* Glasses */
+        .accessory.glasses-none { display: none; }
+
+        .accessory.glasses-round {
+            width: 170px;
+            height: 60px;
+            top: 200px !important; /* Increased from 10px */
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .accessory.glasses-round::before,
+        .accessory.glasses-round::after {
+            content: '';
+            position: absolute;
+            width: 60px;
+            height: 60px;
+            border: 4px solid #333;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .accessory.glasses-round::before { left: 20px; }
+        .accessory.glasses-round::after { right: 20px; }
+
+        .accessory.glasses-cool {
+            width: 170px;
+            height: 55px;
+            background: #1a202c;
+            top: 140px !important; /* Increased from 120px */
+            left: 50%;
+            transform: translateX(-50%);
+            clip-path: polygon(0 20%, 45% 20%, 45% 0, 55% 0, 55% 20%, 100% 20%, 100% 100%, 0 100%);
+        }
+
+        .accessory.glasses-heart {
+            width: 170px;
+            height: 70px;
+            top: 170px !important; /* Increased from 115px */
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .accessory.glasses-heart::before,
+        .accessory.glasses-heart::after {
+            content: '';
+            position: absolute;
+            width: 50px;
+            height: 45px;
+            background: #e53e3e;
+            border-radius: 50px 50px 0 0;
+            transform: rotate(-45deg);
+            transform-origin: 0 100%;
+        }
+
+        .accessory.glasses-heart::before { left: 30px; }
+        .accessory.glasses-heart::after { left: 90px; }
+
+        .accessory.glasses-star {
+            width: 170px;
+            height: 60px;
+            top: 160px !important; /* Increased from 120px */
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .accessory.glasses-star::before,
+        .accessory.glasses-star::after {
+            content: '★';
+            position: absolute;
+            font-size: 60px;
+            color: #ffd700;
+            text-shadow: 0 0 3px #333;
+        }
+
+        .accessory.glasses-star::before { left: 20px; }
+        .accessory.glasses-star::after { right: 20px; }
+
+        .accessory.glasses-pixel {
+            width: 170px;
+            height: 35px;
+            background: #333;
+            top: 210px !important; /* Increased from 125px */
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .accessory.glasses-monocle {
+            width: 60px;
+            height: 60px;
+            border: 5px solid #8b7355;
+            border-radius: 50%;
+            top: 210px !important; /* Increased from 120px */
+            left: 55%;
+            transform: translateX(-50%);
+            background: rgba(255, 255, 255, 0.3);
+        }
+        /* Necklaces */
+        .necklace-none { display: none; }
+
+        .necklace-chain {
+            width: 120px;
+            height: 120px;
+            border: 4px solid #ffd700;
+            border-radius: 50%;
+            top: 180px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-bottom: 6px solid #ffd700;
+            border-top-color: transparent;
+            border-left-color: transparent;
+            border-right-color: transparent;
+        }
+
+        .necklace-bowtie {
+            width: 70px;
+            height: 35px;
+            background: #e53e3e;
+            top: 250px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .necklace-bowtie::before,
+        .necklace-bowtie::after {
+            content: '';
+            position: absolute;
+            width: 35px;
+            height: 35px;
+            background: #e53e3e;
+            transform: rotate(45deg);
+        }
+
+        .necklace-bowtie::before { left: -18px; }
+        .necklace-bowtie::after { right: -18px; }
+
+        .necklace-collar {
+            width: 130px;
+            height: 30px;
+            background: #4a5568;
+            border-radius: 15px;
+            top: 205px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .necklace-collar::after {
+            content: '';
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            background: #ffd700;
+            border-radius: 50%;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .necklace-pearls {
+            width: 120px;
+            height: 25px;
+            top: 205px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: repeating-radial-gradient(circle at 12px center, #fff 0, #fff 10px, transparent 10px, transparent 24px);
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
+        }
+
+        .necklace-medallion {
+            width: 50px;
+            height: 50px;
+            background: #cd7f32;
+            border-radius: 50%;
+            top: 205px;
+            left: 50%;
+            transform: translateX(-50%);
+            box-shadow: 0 3px 10px rgba(0,0,0,0.3);
+        }
+
+        .necklace-medallion::before {
+            content: '★';
+            position: absolute;
+            font-size: 30px;
+            color: #8b5a2b;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .necklace-scarf {
+            width: 140px;
+            height: 45px;
+            background: linear-gradient(45deg, #ff6b6b 25%, #4ecdc4 25%, #4ecdc4 50%, #ff6b6b 50%, #ff6b6b 75%, #4ecdc4 75%);
+            background-size: 20px 20px;
+            top: 200px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 20px;
+        }
+
+        /* Face accessories */
+        .face-none { display: none; }
+
+        .face-mustache {
+            width: 100px;
+            height: 35px;
+            background: #333;
+            top: 160px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 0 0 50% 50%;
+        }
+
+        .face-blush {
+            width: 150px;
+            height: 25px;
+            top: 150px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .face-blush::before,
+        .face-blush::after {
+            content: '';
+            position: absolute;
+            width: 35px;
+            height: 25px;
+            background: rgba(255, 182, 193, 0.6);
+            border-radius: 50%;
+        }
+
+        .face-blush::before { left: 15px; }
+        .face-blush::after { right: 15px; }
+
+        .face-freckles {
+            width: 120px;
+            height: 50px;
+            top: 145px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: repeating-radial-gradient(circle at 20% 50%, #8b7355 0, #8b7355 2px, transparent 2px, transparent 18px),
+                        repeating-radial-gradient(circle at 80% 50%, #8b7355 0, #8b7355 2px, transparent 2px, transparent 18px);
+        }
+
+        .face-whiskers {
+            width: 170px;
+            height: 50px;
+            top: 150px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .face-whiskers::before,
+        .face-whiskers::after {
+            content: '';
+            position: absolute;
+            width: 50px;
+            height: 2px;
+            background: #333;
+            top: 50%;
+        }
+
+        .face-whiskers::before { 
+            left: 15px; 
+            transform: rotate(-10deg);
+            box-shadow: 0 12px 0 #333, 0 -12px 0 #333;
+        }
+        .face-whiskers::after { 
+            right: 15px; 
+            transform: rotate(10deg);
+            box-shadow: 0 12px 0 #333, 0 -12px 0 #333;
+        }
+    bottom: 100px solid #9f7aea;
+            top: 50px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .hat-crown {
+            width: 110px;
+            height: 60px;
+            background: #ffd700;
+            top: 60px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+
+        .hat-crown::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 35px;
+            background: inherit;
+            top: -18px;
+            clip-path: polygon(0 100%, 20% 0, 40% 100%, 60% 0, 80% 100%, 100% 0, 100% 100%);
+        }
+
+        .hat-beanie {
+            width: 110px;
+            height: 70px;
+            background: #4a5568;
+            border-radius: 50% 50% 30% 30%;
+            top: 140px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .hat-tophat {
+            width: 100px;
+            height: 80px;
+            background: #1a202c;
+            top: 120px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .hat-tophat::after {
+            content: '';
+            position: absolute;
+            width: 140px;
+            height: 18px;
+            background: #1a202c;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .hat-bandana {
+            width: 120px;
+            height: 50px;
+            background: #e53e3e;
+            top: 175px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 50% 50% 0 0;
+            overflow: hidden;
+        }
+
+        .hat-bandana::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 12px;
+            background: repeating-linear-gradient(90deg, white 0, white 6px, transparent 6px, transparent 12px);
+            bottom: 5px;
+        }
+
+        /* Glasses */
+        .glasses-none { display: none; }
+
+        .glasses-round {
+            width: 170px;
+            height: 60px;
+            top: 140px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .glasses-round::before,
+        .glasses-round::after {
+            content: '';
+            position: absolute;
+            width: 60px;
+            height: 60px;
+            border: 4px solid #333;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .glasses-round::before { left: 20px; }
+        .glasses-round::after { right: 20px; }
+
+        .glasses-cool {
+            width: 170px;
+            height: 55px;
+            background: #1a202c;
+            top: 140px;
+            left: 50%;
+            transform: translateX(-50%);
+            clip-path: polygon(0 20%, 45% 20%, 45% 0, 55% 0, 55% 20%, 100% 20%, 100% 100%, 0 100%);
+        }
+
+        .glasses-heart {
+            width: 170px;
+            height: 70px;
+            top: 135px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .glasses-heart::before,
+        .glasses-heart::after {
+            content: '';
+            position: absolute;
+            width: 50px;
+            height: 45px;
+            background: #e53e3e;
+            border-radius: 50px 50px 0 0;
+            transform: rotate(-45deg);
+            transform-origin: 0 100%;
+        }
+
+        .glasses-heart::before { left: 30px; }
+        .glasses-heart::after { left: 90px; }
+
+        .glasses-star {
+            width: 170px;
+            height: 60px;
+            top: 140px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .glasses-star::before,
+        .glasses-star::after {
+            content: '★';
+            position: absolute;
+            font-size: 60px;
+            color: #ffd700;
+            text-shadow: 0 0 3px #333;
+        }
+
+        .glasses-star::before { left: 20px; }
+        .glasses-star::after { right: 20px; }
+
+        .glasses-pixel {
+            width: 170px;
+            height: 35px;
+            background: #333;
+            top: 145px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .glasses-monocle {
+            width: 60px;
+            height: 60px;
+            border: 5px solid #8b7355;
+            border-radius: 50%;
+            top: 140px;
+            left: 60%;
+            transform: translateX(-50%);
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        /* Necklaces */
+        .necklace-none { display: none; }
+
+        .necklace-chain {
+            width: 120px;
+            height: 120px;
+            border: 4px solid #ffd700;
+            border-radius: 50%;
+            top: 180px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-bottom: 6px solid #ffd700;
+            border-top-color: transparent;
+            border-left-color: transparent;
+            border-right-color: transparent;
+        }
+
+        .necklace-bowtie {
+            width: 70px;
+            height: 35px;
+            background: #e53e3e;
+            top: 230px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .necklace-bowtie::before,
+        .necklace-bowtie::after {
+            content: '';
+            position: absolute;
+            width: 35px;
+            height: 35px;
+            background: #e53e3e;
+            transform: rotate(45deg);
+        }
+
+        .necklace-bowtie::before { left: -18px; }
+        .necklace-bowtie::after { right: -18px; }
+
+        .necklace-collar {
+            width: 130px;
+            height: 30px;
+            background: #4a5568;
+            border-radius: 15px;
+            top: 225px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .necklace-collar::after {
+            content: '';
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            background: #ffd700;
+            border-radius: 50%;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .necklace-pearls {
+            width: 120px;
+            height: 25px;
+            top: 225px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: repeating-radial-gradient(circle at 12px center, #fff 0, #fff 10px, transparent 10px, transparent 24px);
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
+        }
+
+        .necklace-medallion {
+            width: 50px;
+            height: 50px;
+            background: #cd7f32;
+            border-radius: 50%;
+            top: 225px;
+            left: 50%;
+            transform: translateX(-50%);
+            box-shadow: 0 3px 10px rgba(0,0,0,0.3);
+        }
+
+        .necklace-medallion::before {
+            content: '★';
+            position: absolute;
+            font-size: 30px;
+            color: #8b5a2b;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .necklace-scarf {
+            width: 140px;
+            height: 45px;
+            background: linear-gradient(45deg, #ff6b6b 25%, #4ecdc4 25%, #4ecdc4 50%, #ff6b6b 50%, #ff6b6b 75%, #4ecdc4 75%);
+            background-size: 20px 20px;
+            top: 220px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 20px;
+        }
+
+        /* Face accessories */
+        .face-none { display: none; }
+
+        .face-mustache {
+            width: 100px;
+            height: 35px;
+            background: #333;
+            top: 180px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 0 0 50% 50%;
+        }
+
+        .face-blush {
+            width: 150px;
+            height: 25px;
+            top: 170px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .face-blush::before,
+        .face-blush::after {
+            content: '';
+            position: absolute;
+            width: 35px;
+            height: 25px;
+            background: rgba(255, 182, 193, 0.6);
+            border-radius: 50%;
+        }
+
+        .face-blush::before { left: 15px; }
+        .face-blush::after { right: 15px; }
+
+        .face-freckles {
+            width: 120px;
+            height: 50px;
+            top: 165px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: repeating-radial-gradient(circle at 20% 50%, #8b7355 0, #8b7355 2px, transparent 2px, transparent 18px),
+                        repeating-radial-gradient(circle at 80% 50%, #8b7355 0, #8b7355 2px, transparent 2px, transparent 18px);
+        }
+
+        .face-whiskers {
+            width: 170px;
+            height: 50px;
+            top: 170px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .face-whiskers::before,
+        .face-whiskers::after {
+            content: '';
+            position: absolute;
+            width: 50px;
+            height: 2px;
+            background: #333;
+            top: 50%;
+        }
+
+        .face-whiskers::before { 
+            left: 15px; 
+            transform: rotate(-10deg);
+            box-shadow: 0 12px 0 #333, 0 -12px 0 #333;
+        }
+        .face-whiskers::after { 
+            right: 15px; 
+            transform: rotate(10deg);
+            box-shadow: 0 12px 0 #333, 0 -12px 0 #333;
+        }
+
+        /* Costume body items */
+        .costume-none { display: none; }
+
+        .costume-tshirt {
+            width: 150px;
+            height: 100px;
+            background: #667eea;
+            bottom: 70px;  /* Moved up from 30px */
+            left: 50%;
+            top: 75%;
+            transform: translateX(-50%);
+            border-radius: 20px 20px 0 0;
+        }
+
+        .costume-suit {
+            width: 150px;
+            height: 120px;
+            background: #1a202c;
+            bottom: 50px;  /* Moved up from 10px */
+            left: 50%;
+            top: 75%;
+            transform: translateX(-50%);
+            border-radius: 20px 20px 0 0;
+        }
+
+        .costume-suit::after {
+            content: '';
+            position: absolute;
+            width: 5px;
+            height: 100px;
+            background: #e53e3e;
+            top: 75%;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .costume-hoodie {
+            width: 160px;
+            height: 110px;
+            background: #718096;
+            bottom: 60px;  /* Moved up from 20px */
+            left: 50%;
+            top: 75%;
+            transform: translateX(-50%);
+            border-radius: 30px 30px 0 0;
+        }
+
+        .costume-hoodie::before {
+            content: '';
+            position: absolute;
+            width: 100px;
+            height: 70px;
+            background: #4a5568;
+            top: 75%;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 0 0 50% 50%;
+        }
+
+        .costume-vest {
+            width: 140px;
+            height: 100px;
+            background: #8b7355;
+            bottom: 70px;  /* Moved up from 30px */
+            left: 50%;
+            top: 75%;
+            transform: translateX(-50%);
+            border-radius: 20px 20px 0 0;
+        }
+
+        .costume-vest::before,
+        .costume-vest::after {
+            content: '';
+            position: absolute;
+            width: 18px;
+            height: 18px;
+            background: #5a4a3a;
+            border-radius: 50%;
+            top: 25px;
+        }
+
+        .costume-vest::before { left: 25px; }
+        .costume-vest::after { right: 25px; }
 
         @media (max-width: 768px) {
-            .container {
-                grid-template-columns: 1fr;
-                gap: 2rem;
-                padding: 1rem;
+            .main-layout {
+                flex-direction: column;
             }
             
-            .platform-grid {
-                grid-template-columns: 1fr;
+            .preview-section {
+                position: static;
+                flex: none;
+                width: 100%;
+                margin-bottom: 20px;
+            }
+            
+            .avatar-preview {
+                width: 300px;
+                height: 300px;
+                margin: 0 auto 20px;
+            }
+            
+            .controls-section {
+                max-height: none;
             }
         }
     </style>
 </head>
 <body>
-    <nav class="navbar">
-        <div class="logo">🚀 launchpads</div>
-        <ul class="nav-links">
-            <li><a href="#create" onclick="showSection('create')">Create</a></li>
-            <li><a href="#docs" onclick="showSection('docs')">Docs</a></li>
-            <li><a href="https://x.com/launchpads100x" target="_blank" class="x-link">𝕏</a></li>
-        </ul>
-        <button class="wallet-btn" id="wallet-btn" onclick="connectWallet()">
-            <span id="wallet-text">Connect Wallet</span>
-            <span id="wallet-address" style="display: none;"></span>
-        </button>
-    </nav>
-
-    <div class="container" id="create-section">
-        <div class="form-section">
-            <h2 class="section-title">Create New Coin</h2>
+    <div class="container">
+        <h1>🐱 No Pets 🐱</h1>
+        <p class="subtitle">Dress up your Pet with cool accessories!</p>
+        
+        <div class="main-layout">
+            <div class="preview-section">
+                <div class="avatar-preview" id="avatarPreview">
+                    <div class="cat-base">
+                        <img src="download.jpg" alt="Cat avatar">
+                    </div>
+                    <div class="accessory hat-none" id="hat"></div>
+                    <div class="accessory glasses-none" id="glasses"></div>
+                    <div class="accessory necklace-none" id="necklace"></div>
+                    <div class="accessory face-none" id="face"></div>
+                    <div class="accessory costume-none" id="costume"></div>
+                </div>
+                
+                <div class="action-buttons">
+                    <button class="action-btn download-btn" onclick="downloadAvatar()">Download</button>
+                    <button class="action-btn random-btn" onclick="randomizeAvatar()">Random</button>
+                    <button class="action-btn reset-btn" onclick="resetAvatar()">Reset</button>
+                </div>
+            </div>
             
-            <div class="form-group">
-                <label for="coin-name">Coin Name</label>
-                <input type="text" id="coin-name" placeholder="Enter your coin name" oninput="updatePreview()">
-            </div>
-
-            <div class="form-group">
-                <label for="coin-ticker">Ticker</label>
-                <input type="text" id="coin-ticker" placeholder="e.g. DOGE" maxlength="10" oninput="updatePreview()">
-            </div>
-
-            <div class="form-group">
-                <label for="description">Description (optional)</label>
-                <textarea id="description" placeholder="Write a short description about your coin" oninput="updatePreview()"></textarea>
-            </div>
-
-            <div class="form-group">
-                <label>Upload Image/Video</label>
-                <div class="upload-area" onclick="document.getElementById('file-input').click()">
-                    <div class="upload-icon">📷</div>
-                    <div>Select file or drag and drop it here</div>
-                    <div class="file-specs">
-                        Image: max 10mb • .jpg, .gif or .png<br>
-                        Video: max 30mb • .mp4 recommended
+            <div class="controls-section">
+                <div class="category">
+                    <div class="category-title">👑 Hats</div>
+                    <div class="options-grid">
+                        <button class="option-btn active" onclick="changeAccessory('hat', 'none')">None</button>
+                        <button class="option-btn" onclick="changeAccessory('hat', 'cap')">🧢 Cap</button>
+                        <button class="option-btn" onclick="changeAccessory('hat', 'wizard')">🧙 Wizard</button>
+                        <button class="option-btn" onclick="changeAccessory('hat', 'crown')">👑 Crown</button>
+                        <button class="option-btn" onclick="changeAccessory('hat', 'beanie')">🎿 Beanie</button>
+                        <button class="option-btn" onclick="changeAccessory('hat', 'tophat')">🎩 Top Hat</button>
+                        <button class="option-btn" onclick="changeAccessory('hat', 'bandana')">🏴‍☠️ Bandana</button>
                     </div>
                 </div>
-                <input type="file" id="file-input" class="file-input" accept="image/*,video/*" onchange="handleFileUpload(event)">
-            </div>
-
-            <div class="form-group">
-                <label>Launch Platforms</label>
-                <div class="platform-grid">
-                    <div class="platform-card" onclick="togglePlatform('pump')">
-                        <div class="platform-logo">P</div>
-                        <div>PumpFun</div>
-                    </div>
-                    <div class="platform-card" onclick="togglePlatform('jupiter')">
-                        <div class="platform-logo">J</div>
-                        <div>Jupiter</div>
-                    </div>
-                    <div class="platform-card" onclick="togglePlatform('bonk')">
-                        <div class="platform-logo">B</div>
-                        <div>Bonk</div>
-                    </div>
-                    <div class="platform-card" onclick="togglePlatform('moonshot')">
-                        <div class="platform-logo">M</div>
-                        <div>Moonshot</div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="form-group">
-                <label for="initial-buy">Initial Buy (SOL)</label>
-                <input type="number" id="initial-buy" placeholder="0.1" step="0.01" min="0.01">
-            </div>
-
-            <button class="launch-btn" onclick="launchCoin()">🚀 Launch Coin</button>
-        </div>
-
-        <div class="preview-section">
-            <h2 class="section-title">Preview</h2>
-            <div class="preview-card">
-                <div class="preview-image" id="preview-image">🪙</div>
-                <h3 id="preview-name">Your Coin Name</h3>
-                <p id="preview-ticker">TICKER</p>
-                <p id="preview-desc">Your coin description will appear here</p>
-            </div>
-        </div>
-    </div>
-
-    <div class="docs-container" id="docs-section" style="display: none;">
-        <div class="docs-content">
-            <h1 class="docs-title">📖 Documentation</h1>
-            
-            <div class="docs-card">
-                <h2>🚀 Getting Started</h2>
-                <p>Welcome to launchpads! Create and deploy your meme coin across multiple platforms in minutes.</p>
                 
-                <h3>Quick Setup</h3>
-                <ol>
-                    <li>Connect your Solana wallet</li>
-                    <li>Fill in your coin details</li>
-                    <li>Upload an image or video</li>
-                    <li>Select launch platforms</li>
-                    <li>Set initial buy amount</li>
-                    <li>Launch your coin!</li>
-                </ol>
-            </div>
-
-            <div class="docs-card">
-                <h2>🎯 Supported Platforms</h2>
+                <div class="category">
+                    <div class="category-title">👓 Glasses</div>
+                    <div class="options-grid">
+                        <button class="option-btn active" onclick="changeAccessory('glasses', 'none')">None</button>
+                        <button class="option-btn" onclick="changeAccessory('glasses', 'round')">🤓 Round</button>
+                        <button class="option-btn" onclick="changeAccessory('glasses', 'cool')">🕶️ Cool</button>
+                        <button class="option-btn" onclick="changeAccessory('glasses', 'heart')">💖 Hearts</button>
+                        <button class="option-btn" onclick="changeAccessory('glasses', 'star')">⭐ Stars</button>
+                        <button class="option-btn" onclick="changeAccessory('glasses', 'pixel')">🎮 Pixel</button>
+                        <button class="option-btn" onclick="changeAccessory('glasses', 'monocle')">🧐 Monocle</button>
+                    </div>
+                </div>
                 
-                <div class="platform-docs">
-                    <h3>🎪 PumpFun</h3>
-                    <p>The most popular meme coin launchpad on Solana. Low fees, instant deployment, and built-in community features.</p>
-                    <ul>
-                        <li>Minimum Initial Buy: 0.01 SOL</li>
-                        <li>Launch Fee: 0.02 SOL</li>
-                        <li>Built-in bonding curve</li>
-                    </ul>
+                <div class="category">
+                    <div class="category-title">💎 Necklaces</div>
+                    <div class="options-grid">
+                        <button class="option-btn active" onclick="changeAccessory('necklace', 'none')">None</button>
+                        <button class="option-btn" onclick="changeAccessory('necklace', 'chain')">⛓️ Chain</button>
+                        <button class="option-btn" onclick="changeAccessory('necklace', 'bowtie')">🎀 Bowtie</button>
+                        <button class="option-btn" onclick="changeAccessory('necklace', 'collar')">📿 Collar</button>
+                        <button class="option-btn" onclick="changeAccessory('necklace', 'pearls')">🔮 Pearls</button>
+                        <button class="option-btn" onclick="changeAccessory('necklace', 'medallion')">🏅 Medal</button>
+                        <button class="option-btn" onclick="changeAccessory('necklace', 'scarf')">🧣 Scarf</button>
+                    </div>
                 </div>
-
-                <div class="platform-docs">
-                    <h3>🪐 Jupiter</h3>
-                    <p>Solana's premier DEX aggregator with advanced trading features and deep liquidity.</p>
-                    <ul>
-                        <li>Minimum Initial Buy: 0.05 SOL</li>
-                        <li>Launch Fee: 0.03 SOL</li>
-                        <li>Advanced trading tools</li>
-                    </ul>
-                </div>
-
-                <div class="platform-docs">
-                    <h3>🦴 Bonk</h3>
-                    <p>Community-focused platform with meme culture at its core. Great for viral coins.</p>
-                    <ul>
-                        <li>Minimum Initial Buy: 0.02 SOL</li>
-                        <li>Launch Fee: 0.025 SOL</li>
-                        <li>Community voting features</li>
-                    </ul>
-                </div>
-
-                <div class="platform-docs">
-                    <h3>🌙 Moonshot</h3>
-                    <p>High-performance launchpad designed for coins with moonshot potential.</p>
-                    <ul>
-                        <li>Minimum Initial Buy: 0.1 SOL</li>
-                        <li>Launch Fee: 0.05 SOL</li>
-                        <li>Premium marketing tools</li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="docs-card">
-                <h2>📋 Requirements</h2>
                 
-                <h3>Coin Information</h3>
-                <ul>
-                    <li><strong>Name:</strong> 3-50 characters, no special symbols</li>
-                    <li><strong>Ticker:</strong> 2-10 characters, uppercase recommended</li>
-                    <li><strong>Description:</strong> Optional, max 500 characters</li>
-                </ul>
-
-                <h3>Media Files</h3>
-                <ul>
-                    <li><strong>Images:</strong> .jpg, .png, .gif up to 10MB</li>
-                    <li><strong>Videos:</strong> .mp4, .mov up to 30MB</li>
-                    <li><strong>Recommended size:</strong> 400x400px or 1:1 aspect ratio</li>
-                </ul>
-
-                <h3>Wallet Requirements</h3>
-                <ul>
-                    <li>Minimum 0.1 SOL for gas fees</li>
-                    <li>Additional SOL for initial buy amount</li>
-                    <li>Compatible wallets: Phantom, Solflare, Backpack</li>
-                </ul>
-            </div>
-
-            <div class="docs-card">
-                <h2>⚠️ Important Notes</h2>
-                <ul>
-                    <li>Once deployed, coin details cannot be changed</li>
-                    <li>Initial buy creates the first liquidity pool</li>
-                    <li>Higher initial buy = better price stability</li>
-                    <li>All platforms have anti-rug pull mechanisms</li>
-                    <li>Coins are automatically verified on deployment</li>
-                </ul>
-            </div>
-
-            <div class="docs-card">
-                <h2>❓ FAQ</h2>
+                <div class="category">
+                    <div class="category-title">😊 Face</div>
+                    <div class="options-grid">
+                        <button class="option-btn active" onclick="changeAccessory('face', 'none')">None</button>
+                        <button class="option-btn" onclick="changeAccessory('face', 'mustache')">🥸 Mustache</button>
+                        <button class="option-btn" onclick="changeAccessory('face', 'blush')">😊 Blush</button>
+                        <button class="option-btn" onclick="changeAccessory('face', 'freckles')">🟤 Freckles</button>
+                        <button class="option-btn" onclick="changeAccessory('face', 'whiskers')">🐱 Whiskers</button>
+                    </div>
+                </div>
                 
-                <h3>How long does deployment take?</h3>
-                <p>Usually 30-60 seconds per platform. Multiple platforms deploy simultaneously.</p>
-
-                <h3>Can I launch on multiple platforms?</h3>
-                <p>Yes! You can select multiple platforms for broader reach and liquidity.</p>
-
-                <h3>What happens to my initial buy?</h3>
-                <p>Your initial buy creates the first trade and provides initial liquidity for the coin.</p>
-
-                <h3>Can I add liquidity later?</h3>
-                <p>Yes, you can add more liquidity after launch through each platform's interface.</p>
+                <div class="category">
+                    <div class="category-title">👕 Costume</div>
+                    <div class="options-grid">
+                        <button class="option-btn active" onclick="changeAccessory('costume', 'none')">None</button>
+                        <button class="option-btn" onclick="changeAccessory('costume', 'tshirt')">👕 T-Shirt</button>
+                        <button class="option-btn" onclick="changeAccessory('costume', 'suit')">🤵 Suit</button>
+                        <button class="option-btn" onclick="changeAccessory('costume', 'hoodie')">🧥 Hoodie</button>
+                        <button class="option-btn" onclick="changeAccessory('costume', 'vest')">🦺 Vest</button>
+                    </div>
+                </div>
+                
+                <div class="category">
+                    <div class="category-title">🎨 Background</div>
+                    <div class="color-grid">
+                        <div class="color-btn active" style="background: #e6f3ff" onclick="changeBackground(event, '#e6f3ff')"></div>
+                        <div class="color-btn" style="background: #ffe6e6" onclick="changeBackground(event, '#ffe6e6')"></div>
+                        <div class="color-btn" style="background: #e6ffe6" onclick="changeBackground(event, '#e6ffe6')"></div>
+                        <div class="color-btn" style="background: #fff0e6" onclick="changeBackground(event, '#fff0e6')"></div>
+                        <div class="color-btn" style="background: #f0e6ff" onclick="changeBackground(event, '#f0e6ff')"></div>
+                        <div class="color-btn" style="background: #e6ffff" onclick="changeBackground(event, '#e6ffff')"></div>
+                        <div class="color-btn" style="background: #ffffe6" onclick="changeBackground(event, '#ffffe6')"></div>
+                        <div class="color-btn" style="background: #1a202c" onclick="changeBackground(event, '#1a202c')"></div>
+                        <div class="color-btn" style="background: linear-gradient(135deg, #667eea, #764ba2)" onclick="changeBackground(event, 'linear-gradient(135deg, #667eea, #764ba2)')"></div>
+                        <div class="color-btn" style="background: linear-gradient(135deg, #f093fb, #f5576c)" onclick="changeBackground(event, 'linear-gradient(135deg, #f093fb, #f5576c)')"></div>
+                        <div class="color-btn" style="background: linear-gradient(135deg, #4facfe, #00f2fe)" onclick="changeBackground(event, 'linear-gradient(135deg, #4facfe, #00f2fe)')"></div>
+                        <div class="color-btn" style="background: linear-gradient(135deg, #fa709a, #fee140)" onclick="changeBackground(event, 'linear-gradient(135deg, #fa709a, #fee140)')"></div>
+                        <div class="color-btn" style="background: linear-gradient(135deg, #30cfd0, #330867)" onclick="changeBackground(event, 'linear-gradient(135deg, #30cfd0, #330867)')"></div>
+                        <div class="color-btn" style="background: linear-gradient(135deg, #a8edea, #fed6e3)" onclick="changeBackground(event, 'linear-gradient(135deg, #a8edea, #fed6e3)')"></div>
+                        <div class="color-btn" style="background: linear-gradient(135deg, #ff9a9e, #fecfef)" onclick="changeBackground(event, 'linear-gradient(135deg, #ff9a9e, #fecfef)')"></div>
+                        <div class="color-btn" style="background: linear-gradient(135deg, #ffecd2, #fcb69f)" onclick="changeBackground(event, 'linear-gradient(135deg, #ffecd2, #fcb69f)')"></div>
+                    </div>
+                </div>
             </div>
-        </div>
-    </div>
-
-    <div class="success-popup" id="success-popup">
-        <div class="popup-content">
-            <div class="popup-icon">🎉</div>
-            <h3>Coin Launched Successfully!</h3>
-            <p>Your coin has been deployed to the selected platforms.</p>
-            <button class="launch-btn" onclick="closePopup()" style="margin-top: 1rem;">Close</button>
         </div>
     </div>
 
     <script>
-        let selectedPlatforms = [];
-        let uploadedFile = null;
-        let walletConnected = false;
-        let walletAddress = null;
-
-        // Check if Phantom is installed
-        const getProvider = () => {
-            if ('phantom' in window) {
-                const provider = window.phantom?.solana;
-                if (provider?.isPhantom) {
-                    return provider;
-                }
-            }
-            window.open('https://phantom.app/', '_blank');
+        const accessories = {
+            hat: 'none',
+            glasses: 'none',
+            necklace: 'none',
+            face: 'none',
+            costume: 'none'
         };
+        let currentBackground = '#e6f3ff';
 
-        // Connect to Phantom wallet
-        async function connectWallet() {
-            const btn = document.getElementById('wallet-btn');
-            const btnText = document.getElementById('wallet-text');
-            const addressSpan = document.getElementById('wallet-address');
-
-            if (walletConnected) {
-                // Disconnect wallet
-                disconnectWallet();
-                return;
-            }
-
-            try {
-                // Set connecting state
-                btn.classList.add('connecting');
-                btnText.textContent = 'Connecting...';
-                
-                const provider = getProvider();
-                if (!provider) {
-                    throw new Error('Phantom wallet not found');
-                }
-
-                const resp = await provider.connect();
-                walletAddress = resp.publicKey.toString();
-                walletConnected = true;
-
-                // Update UI to connected state
-                btn.classList.remove('connecting');
-                btn.classList.add('connected');
-                btnText.innerHTML = `<span class="wallet-status"></span> Connected`;
-                addressSpan.textContent = `${walletAddress.slice(0, 4)}...${walletAddress.slice(-4)}`;
-                addressSpan.style.display = 'block';
-                btnText.style.display = 'none';
-
-                console.log('Connected to wallet:', walletAddress);
-
-                // Listen for disconnect events
-                provider.on('disconnect', () => {
-                    disconnectWallet();
-                });
-
-            } catch (error) {
-                console.error('Error connecting to wallet:', error);
-                
-                // Reset button state
-                btn.classList.remove('connecting');
-                btnText.textContent = 'Connect Wallet';
-                
-                if (error.message.includes('User rejected')) {
-                    alert('Connection cancelled by user');
-                } else if (error.message.includes('not found')) {
-                    alert('Phantom wallet not found. Please install Phantom extension.');
-                } else {
-                    alert('Failed to connect wallet. Please try again.');
-                }
-            }
-        }
-
-        function disconnectWallet() {
-            const btn = document.getElementById('wallet-btn');
-            const btnText = document.getElementById('wallet-text');
-            const addressSpan = document.getElementById('wallet-address');
-
-            walletConnected = false;
-            walletAddress = null;
-
-            // Reset UI
-            btn.classList.remove('connected', 'connecting');
-            btnText.textContent = 'Connect Wallet';
-            btnText.style.display = 'block';
-            addressSpan.style.display = 'none';
-
-            console.log('Wallet disconnected');
-        }
-
-        // Check if wallet is already connected on page load
-        async function checkWalletConnection() {
-            try {
-                const provider = getProvider();
-                if (provider && provider.isConnected) {
-                    const resp = await provider.connect({ onlyIfTrusted: true });
-                    if (resp.publicKey) {
-                        walletAddress = resp.publicKey.toString();
-                        walletConnected = true;
-
-                        const btn = document.getElementById('wallet-btn');
-                        const btnText = document.getElementById('wallet-text');
-                        const addressSpan = document.getElementById('wallet-address');
-
-                        btn.classList.add('connected');
-                        btnText.innerHTML = `<span class="wallet-status"></span> Connected`;
-                        addressSpan.textContent = `${walletAddress.slice(0, 4)}...${walletAddress.slice(-4)}`;
-                        addressSpan.style.display = 'block';
-                        btnText.style.display = 'none';
-                    }
-                }
-            } catch (error) {
-                console.log('No previous wallet connection found');
-            }
-        }
-
-        function showSection(section) {
-            if (section === 'create') {
-                document.getElementById('create-section').style.display = 'grid';
-                document.getElementById('docs-section').style.display = 'none';
-            } else if (section === 'docs') {
-                document.getElementById('create-section').style.display = 'none';
-                document.getElementById('docs-section').style.display = 'block';
-            }
-        }
-
-        function updatePreview() {
-            const name = document.getElementById('coin-name').value || 'Your Coin Name';
-            const ticker = document.getElementById('coin-ticker').value || 'TICKER';
-            const desc = document.getElementById('description').value || 'Your coin description will appear here';
-
-            document.getElementById('preview-name').textContent = name;
-            document.getElementById('preview-ticker').textContent = ticker.toUpperCase();
-            document.getElementById('preview-desc').textContent = desc;
-        }
-
-        function handleFileUpload(event) {
-            const file = event.target.files[0];
-            if (file) {
-                uploadedFile = file;
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    if (file.type.startsWith('image/')) {
-                        document.getElementById('preview-image').innerHTML = `<img src="${e.target.result}" style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%;">`;
-                    } else {
-                        document.getElementById('preview-image').innerHTML = '🎥';
-                    }
-                };
-                reader.readAsDataURL(file);
-            }
-        }
-
-        function togglePlatform(platform) {
-            const card = event.currentTarget;
-            const isSelected = card.classList.contains('selected');
+        function changeAccessory(type, style) {
+            accessories[type] = style;
+            const element = document.getElementById(type);
             
-            if (isSelected) {
-                card.classList.remove('selected');
-                selectedPlatforms = selectedPlatforms.filter(p => p !== platform);
-            } else {
-                card.classList.add('selected');
-                selectedPlatforms.push(platform);
-            }
+            // Remove all classes and add base classes
+            element.className = 'accessory';
+            element.classList.add(`${type}-${style}`);
+            
+            // Update active button
+            const category = event.target.closest('.category');
+            const buttons = category.querySelectorAll('.option-btn');
+            buttons.forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
         }
 
-        function launchCoin() {
-            const name = document.getElementById('coin-name').value;
-            const ticker = document.getElementById('coin-ticker').value;
+        function changeBackground(color, element) {
+            currentBackground = color;
+            document.getElementById('avatarPreview').style.background = color;
             
-            if (!walletConnected) {
-                alert('Please connect your wallet first');
-                return;
-            }
-            
-            if (!name || !ticker) {
-                alert('Please fill in coin name and ticker');
-                return;
-            }
-            
-            if (selectedPlatforms.length === 0) {
-                alert('Please select at least one launch platform');
-                return;
-            }
-
-            // Simulate launch process
-            const btn = document.querySelector('.launch-btn');
-            btn.disabled = true;
-            btn.textContent = 'Launching... 🚀';
-            
-            setTimeout(() => {
-                btn.disabled = false;
-                btn.textContent = '🚀 Launch Coin';
-                document.getElementById('success-popup').style.display = 'flex';
-            }, 2000);
+            // Update active button
+            const buttons = document.querySelectorAll('.color-btn');
+            buttons.forEach(btn => btn.classList.remove('active'));
+            element.classList.add('active');
         }
-
-        function closePopup() {
-            document.getElementById('success-popup').style.display = 'none';
-            // Reset form
-            document.getElementById('coin-name').value = '';
-            document.getElementById('coin-ticker').value = '';
-            document.getElementById('description').value = '';
-            document.getElementById('initial-buy').value = '';
-            document.querySelectorAll('.platform-card').forEach(card => card.classList.remove('selected'));
-            selectedPlatforms = [];
-            updatePreview();
-            document.getElementById('preview-image').innerHTML = '🪙';
-        }
-
-        // Add some interactive effects
-        document.addEventListener('DOMContentLoaded', function() {
-            // Check for existing wallet connection
-            checkWalletConnection();
+        function randomizeAvatar() {
+            const accessoryTypes = ['hat', 'glasses', 'necklace', 'face', 'costume'];
             
-            // Animate cards on scroll
-            const cards = document.querySelectorAll('.platform-card');
-            cards.forEach((card, index) => {
-                card.style.animationDelay = `${index * 0.1}s`;
+            accessoryTypes.forEach(type => {
+                const buttons = document.querySelectorAll(`.category .option-btn[onclick*="${type}"]`);
+                const randomIndex = Math.floor(Math.random() * buttons.length);
+                buttons[randomIndex].click();
             });
-        });
+            
+            // Random background
+            const bgButtons = document.querySelectorAll('.color-btn');
+            const randomIndex = Math.floor(Math.random() * bgButtons.length);
+            const randomButton = bgButtons[randomIndex];
+            const color = randomButton.style.background; // Get the background style
+            changeBackground({ target: randomButton }, color); // Simulate the event object
+        }
+
+        function resetAvatar() {
+            // Click all "None" buttons
+            document.querySelectorAll('.option-btn:first-child').forEach(btn => {
+                if (btn.textContent === 'None') btn.click();
+            });
+            
+            // Reset to first background
+            const firstBgButton = document.querySelector('.color-btn:first-child');
+            changeBackground({ target: firstBgButton }, '#e6f3ff');
+        }
+        function downloadAvatar() {
+            const avatarPreview = document.getElementById('avatarPreview');
+            
+            html2canvas(avatarPreview, {
+                backgroundColor: null,
+                scale: 2
+            }).then(canvas => {
+                canvas.toBlob(function(blob) {
+                    const url = URL.createObjectURL(blob);
+                    const a = document.createElement('a');
+                    a.href = url;
+                    a.download = 'my-cat-avatar.png';
+                    a.click();
+                    URL.revokeObjectURL(url);
+                });
+            });
+        }
     </script>
+    
+    <!-- Include html2canvas for screenshot functionality -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 </body>
 </html>
