@@ -3,209 +3,97 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GP Token</title>
+    <title>TruthRoom</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: white;
+        * {
             margin: 0;
-            padding: 20px;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Courier New', monospace;
+            background: #000;
+            color: #00ff00;
+            padding: 40px 20px;
             line-height: 1.6;
-        }
-        
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            background: white;
-            padding: 40px;
-        }
-        
-        .header {
-            text-align: center;
-            margin-bottom: 40px;
-        }
-        
-        .logo {
-            width: 300px;
-            height: 300px;
-            border-radius: 50%;
-            margin: 0 auto 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-        }
-        
-        .social-links {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            margin-bottom: 20px;
-        }
-        
-        .social-icon {
-            width: 40px;
-            height: 40px;
-            background: #333;
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 20px;
-            text-decoration: none;
-            transition: background 0.3s ease;
-        }
-        
-        .social-icon:hover {
-            background: #555;
-        }
-        
-        .x-icon {
-            background: #000;
-        }
-        
-        .content-layout {
-            display: grid;
-            grid-template-columns: 400px 1fr;
-            gap: 30px;
-            align-items: start;
-        }
-        
-        .social-post {
-            margin-bottom: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
             text-align: center;
         }
         
-        .center-content {
-            text-align: center;
-            padding: 0 20px;
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 30px;
+            text-shadow: 0 0 20px #00ff00;
         }
         
-        .project-title {
-            color: black;
-            font-size: 36px;
-            font-weight: bold;
+        h2 {
+            color: #ffff00;
+            font-size: 1.5rem;
+            margin: 40px 0 20px 0;
+        }
+        
+        p {
+            font-size: 1.1rem;
             margin-bottom: 20px;
-            text-transform: uppercase;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
         }
         
-        .project-description {
-            color: black;
-            font-size: 16px;
-            margin-bottom: 40px;
-        }
-        
-        .project-description a {
-            color: #0066cc;
-            text-decoration: none;
-            border-bottom: 1px solid #0066cc;
-            transition: color 0.3s ease;
-        }
-        
-        .project-description a:hover {
-            color: #004499;
-            border-bottom-color: #004499;
-        }
-        
-        .main-text {
-            color: black;
-            font-size: 18px;
-            font-weight: bold;
-            text-transform: uppercase;
-            line-height: 1.8;
+        .live-status {
+            color: #ff0000;
+            font-size: 2rem;
             margin: 40px 0;
+            animation: blink 1s infinite;
         }
         
-        .code-block {
-            margin-top: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0.3; }
         }
         
-        .tweets-button {
-            display: inline-block;
-            background: #000;
-            color: white;
-            padding: 12px 24px;
-            border-radius: 8px;
+        .links {
+            margin: 40px 0;
+            font-size: 1.2rem;
+        }
+        
+        .links a {
+            color: #ffff00;
             text-decoration: none;
-            font-size: 14px;
-            font-weight: bold;
-            text-transform: uppercase;
-            transition: background 0.3s ease;
-            margin-top: 20px;
+            margin: 0 20px;
         }
         
-        .tweets-button:hover {
-            background: #333;
+        .links a:hover {
+            color: #ffffff;
+            text-shadow: 0 0 10px #ffff00;
         }
         
-        @media (max-width: 1200px) {
-            .content-layout {
-                grid-template-columns: 1fr;
-                gap: 20px;
-            }
-            
-            .social-post {
-                max-width: 400px;
-                margin: 10px auto;
+        @media (max-width: 768px) {
+            h1 { font-size: 2rem; }
+            .links a { 
+                display: block; 
+                margin: 10px 0; 
             }
         }
     </style>
 </head>
 <body>
-<div class="social-links">
-        <a href="https://x.com/Gp3097973148655" target="_blank" class="social-icon x-icon">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
-            </svg>
-        </a>
+    <h1>TRUTH TERMINAL 3D</h1>
+    
+    <div class="live-status">● LIVE NOW</div>
+    
+    <p>We created a Truth Terminal 3D stream that brings his backroom to life.</p>
+    
+    <p>Token holders can interact with him in real-time in an immersive 3D environment.</p>
+    
+    <h2>Watch the Stream</h2>
+    <p>Experience Truth Terminal like never before - in full 3D with live interactions.</p>
+    
+    <div class="links">
+        <a href="https://pump.fun" target="_blank">pump.fun</a>
+        <a href="https://x.com" target="_blank">x.com</a>
     </div>
-    <div class="container">
-        <div class="header">
-                <div class="logo">
-                    <img src="pfp.png" alt="" style="width: 100%; height: auto; border-radius: 8px;">
-                </div>
-        </div>
-        
-        <div class="content-layout">
-            <div class="left-posts">
-                <div class="social-post">
-                    <img src="social-post-1.png" alt="Social Post 1" style="width: 100%; height: auto; border-radius: 8px;">
-                </div>
-            </div>
-            
-            <div class="center-content">
-                <div class="project-title">
-                    What is Gp?
-                </div>
-                <div class="project-description">
-                    • The memecoin project solporttom never got to make"<br><br>
-                    • Sol Port Tom had a project named "graphite" which is an solana builder project but he never got to tokenize it until now<br><br>
-                </div>
-                <a href="https://x.com/search?q=from%3ASolportTom%20gp&src=typed_query" target="_blank" class="tweets-button">
-                    View Toms's Tweets About GP
-                </a>
-            </div>
-        </div>
-        
-        <div class="bottom-section" style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-top: 40px; align-items: start;">
-            <div class="main-text">
-                Gp Lore:<br>
-                SolPortTom has been a builder on solana since it was 5$ a coin, he truly believes it will change the world which it has but he began work on a project named "GP" aka graphite which allows users to build on solana easier, its technical but thats the basis of it, he never made it an actua;l token
-                 
-            </div>
-            
-            <div class="code-block">
-                <img src="code-snippet.png" alt="Code Snippet" style="width: 100%; height: auto; border-radius: 8px;">
-            </div>
-        </div>
-    </div>
+    
+    <p>The future of AI interaction is here.</p>
 </body>
 </html>
