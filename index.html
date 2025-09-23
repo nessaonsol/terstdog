@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TruthRoom</title>
+    <title>3Coin</title>
+    <link rel="icon" type="image/x-icon" href="3coin.png">
     <style>
         * {
             margin: 0;
@@ -12,89 +13,357 @@
         }
         
         body {
-            font-family: 'Courier New', monospace;
-            background: #000;
-            color: #00ff00;
-            padding: 40px 20px;
+            font-family: 'Arial', sans-serif;
             line-height: 1.6;
+            color: #2c2c2c;
+            scroll-behavior: smooth;
+            background: linear-gradient(135deg, #ff6b35, #f7931e);
+        }
+        
+        /* Hero Section */
+        .hero {
+            min-height: 60vh;
+            padding: 80px 5% 60px 5%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
             text-align: center;
-        }
-        
-        h1 {
-            font-size: 3rem;
-            margin-bottom: 30px;
-            text-shadow: 0 0 20px #00ff00;
-        }
-        
-        h2 {
-            color: #ffff00;
-            font-size: 1.5rem;
-            margin: 40px 0 20px 0;
-        }
-        
-        p {
-            font-size: 1.1rem;
-            margin-bottom: 20px;
-            max-width: 800px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-        
-        .live-status {
-            color: #ff0000;
-            font-size: 2rem;
-            margin: 40px 0;
-            animation: blink 1s infinite;
-        }
-        
-        @keyframes blink {
-            0%, 50% { opacity: 1; }
-            51%, 100% { opacity: 0.3; }
-        }
-        
-        .links {
-            margin: 40px 0;
-            font-size: 1.2rem;
-        }
-        
-        .links a {
-            color: #ffff00;
-            text-decoration: none;
-            margin: 0 20px;
-        }
-        
-        .links a:hover {
+            background: linear-gradient(135deg, #ff6b35, #f7931e);
             color: #ffffff;
-            text-shadow: 0 0 10px #ffff00;
+            position: relative;
         }
         
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: bold;
+            margin-bottom: 1.5rem;
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.3);
+            animation: fadeInUp 1s ease-out;
+            letter-spacing: 2px;
+            color: #ffffff;
+        }
+        
+        .hero p {
+            font-size: 1.3rem;
+            max-width: 700px;
+            margin-bottom: 2rem;
+            text-shadow: 1px 1px 4px rgba(0,0,0,0.3);
+            animation: fadeInUp 1s ease-out 0.3s both;
+            color: #ffffff;
+        }
+        
+        .scroll-indicator {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: bounce 2s infinite;
+        }
+        
+        .scroll-arrow {
+            width: 30px;
+            height: 30px;
+            border: 2px solid #ffffff;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            color: #ffffff;
+        }
+        
+        .scroll-arrow:hover {
+            background: #ffffff;
+            color: #ff6b35;
+        }
+        
+        /* Social Links */
+        .social-links {
+            position: absolute;
+            top: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 20px;
+            z-index: 10;
+        }
+        
+        .social-link {
+            width: 50px;
+            height: 50px;
+            border: 2px solid #ffffff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #ffffff;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+        }
+        
+        .social-link:hover {
+            background: #ffffff;
+            color: #ff6b35;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+        }
+        
+        .social-link svg {
+            width: 24px;
+            height: 24px;
+        }
+        
+        /* Content Sections */
+        .section {
+            min-height: auto;
+            padding: 60px 5%;
+            display: flex;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.95);
+        }
+        
+        .section:nth-child(even) {
+            background: rgba(255, 255, 255, 0.9);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            width: 100%;
+        }
+        
+        .content-box {
+            display: grid;
+            grid-template-columns: 1fr 400px;
+            gap: 60px;
+            align-items: center;
+            margin-bottom: 60px;
+        }
+        
+        .text-content h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            font-weight: bold;
+            letter-spacing: 1px;
+            color: #ff6b35;
+        }
+        
+        .text-content p {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            margin-bottom: 2rem;
+            color: #4a4a4a;
+        }
+        
+        .content-image {
+            width: 100%;
+            height: 300px;
+            border-radius: 15px;
+            object-fit: cover;
+            border: 2px solid #ff6b35;
+            transition: all 0.3s ease;
+        }
+        
+        .content-image:hover {
+            transform: scale(1.02);
+            box-shadow: 0 10px 30px rgba(255, 107, 53, 0.3);
+            border-color: #f7931e;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 15px 30px;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            border: 2px solid #ff6b35;
+            cursor: pointer;
+            letter-spacing: 0.5px;
+            background: #ff6b35;
+            color: #ffffff;
+            box-shadow: 0 5px 15px rgba(255, 107, 53, 0.3);
+        }
+        
+        .btn:hover {
+            background: transparent;
+            color: #ff6b35;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(255, 107, 53, 0.4);
+        }
+        
+        /* Final Section */
+        .final-section {
+            background: rgba(255, 255, 255, 0.95);
+        }
+        
+        .final-section .content-box {
+            margin-bottom: 0;
+        }
+        
+        .final-section h2 {
+            color: #ff6b35;
+        }
+        
+        .final-section p {
+            color: #4a4a4a;
+        }
+        
+        .final-section .content-image {
+            border-color: #ff6b35;
+        }
+        
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateX(-50%) translateY(0);
+            }
+            40% {
+                transform: translateX(-50%) translateY(-10px);
+            }
+            60% {
+                transform: translateX(-50%) translateY(-5px);
+            }
+        }
+        
+        /* Responsive Design */
         @media (max-width: 768px) {
-            h1 { font-size: 2rem; }
-            .links a { 
-                display: block; 
-                margin: 10px 0; 
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero p {
+                font-size: 1.2rem;
+                padding: 0 20px;
+            }
+            
+            .content-box {
+                grid-template-columns: 1fr;
+                gap: 40px;
+                text-align: center;
+            }
+            
+            .text-content h2 {
+                font-size: 2rem;
+            }
+            
+            .section {
+                padding: 60px 5%;
+            }
+            
+            .social-links {
+                top: 20px;
+                gap: 15px;
+            }
+            
+            .social-link {
+                width: 45px;
+                height: 45px;
+            }
+            
+            .social-link svg {
+                width: 20px;
+                height: 20px;
             }
         }
     </style>
 </head>
 <body>
-    <h1>TruthRoom</h1>
+    <!-- Hero Section -->
+    <section class="hero">
+        <!-- Social Links -->
+        <div class="social-links">
+            <a href="https://x.com/bonk_inu" class="social-link" target="_blank" rel="noopener noreferrer" title="X (Twitter)">
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                </svg>
+            </a>
+        </div>
+        
+        <h1>3Coin</h1>
+        <p>The number which was a meme for bonk before 69 AND 420</p>
+        <div class="scroll-indicator" onclick="scrollToNext()">
+            <div class="scroll-arrow">↓</div>
+        </div>
+    </section>
     
-    <div class="live-status">● LIVE NOW</div>
+    <!-- Section 1 -->
+    <section class="section" id="section1">
+        <div class="container">
+            <div class="content-box">
+                <div class="text-content">
+                    <h2>The Impossible Target</h2>
+                    <p>Throughout 2023 and 2024, Bonk holders kept setting $3 as their price target. It became the ultimate goal that everyone talked about - "Bonk to $3!" was everywhere in the community. But there was just one problem: Bonk could never actually reach $3. The all-time high peaked around $2, making that extra dollar seem impossible to achieve.</p>
+                    <a href="https://coinmarketcap.com/currencies/bonk/" class="btn" target="_blank" rel="noopener noreferrer">Check Bonk Price</a>
+                </div>
+                <img src="image1.png" alt="Bonk Price Target Memes" class="content-image">
+            </div>
+            
+            <div class="content-box">
+                <div class="text-content">
+                    <h2>The Running Joke</h2>
+                    <p>As Bonk kept failing to hit $3, the number itself became a legendary meme within the community. People would joke about it constantly - "3" became synonymous with unreachable dreams and hopium. The more Bonk struggled to break that barrier, the funnier and more iconic the number became. It wasn't just a price target anymore; it was the ultimate inside joke.</p>
+                    <a href="https://dexscreener.com/solana/bonk" class="btn" target="_blank" rel="noopener noreferrer">View Bonk Chart</a>
+                </div>
+                <img src="image2.png" alt="The Elusive $3 Target" class="content-image">
+            </div>
+        </div>
+    </section>
     
-    <p>We created a Truth Terminal 3D stream that brings his backroom to life.</p>
+    <!-- Section 2 -->
+    <section class="section" id="section2">
+        <div class="container">
+            <div class="content-box">
+                <div class="text-content">
+                    <h2>The Meme Lives On</h2>
+                    <p>Even as Bonk's price action moved on to different targets, "3" remained forever etched in the community's memory. It became the perfect representation of crypto hopium and the dreams that never quite materialize. Now, "3" stands as a tribute to all those price predictions that became legendary memes instead of reality. Sometimes the meme is worth more than reaching the target.</p>
+                    <a href="https://www.coingecko.com/en/coins/bonk" class="btn" target="_blank" rel="noopener noreferrer">Track the Legend</a>
+                </div>
+                <img src="image3.png" alt="3 Becomes a Legend" class="content-image">
+            </div>
+        </div>
+    </section>
     
-    <p>Token holders can interact with him in real-time in an immersive 3D environment.</p>
-    
-    <h2>Watch the Stream</h2>
-    <p>Experience Truth Terminal like never before - in full 3D with live interactions.</p>
-    
-    <div class="links">
-        <a href="https://pump.fun" target="_blank">pump.fun</a>
-        <a href="https://x.com" target="_blank">x.com</a>
-    </div>
-    
-    <p>The future of AI interaction is here.</p>
+    <script>
+        function scrollToNext() {
+            document.getElementById('section1').scrollIntoView({
+                behavior: 'smooth'
+            });
+        }
+        
+        // Add scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animation = 'fadeInUp 0.8s ease-out forwards';
+                }
+            });
+        }, observerOptions);
+        
+        document.querySelectorAll('.content-box').forEach(box => {
+            observer.observe(box);
+        });
+    </script>
 </body>
 </html>
-
