@@ -3,69 +3,367 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>$text</title>
+    <title>60</title>
+    <link rel="icon" type="image/x-icon" href="601.png">
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
         body {
-            font-family: Arial, sans-serif;
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 40px 20px;
+            font-family: 'Arial', sans-serif;
             line-height: 1.6;
-            background-color: #f5f5f5;
-        .ca-section {
-            margin-top: 30px;
-            text-align: left;
+            color: #2c2c2c;
+            scroll-behavior: smooth;
+            background: #ffffff;
         }
-        .ca-section h3 {
-            font-size: 1.5em;
-            margin-bottom: 10px;
-            color: #333;
-        }
-    }
-        .container {
-            background-color: white;
-            padding: 40px;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        
+        /* Hero Section */
+        .hero {
+            min-height: 60vh;
+            padding: 80px 5% 60px 5%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
             text-align: center;
+            background: #ffffff;
+            color: #2c2c2c;
+            position: relative;
         }
-        .phone-number {
-            font-size: 2.5em;
+        
+        .hero h1 {
+            font-size: 3.5rem;
             font-weight: bold;
-            color: #333;
-            margin-top: 30px;
-            padding: 20px;
-            border: 3px solid #333;
-            border-radius: 10px;
-            background-color: #f9f9f9;
+            margin-bottom: 1.5rem;
+            text-shadow: 2px 2px 8px rgba(44,44,44,0.1);
+            animation: fadeInUp 1s ease-out;
+            letter-spacing: 2px;
+            color: #1a1a1a;
         }
-        p {
-            font-size: 1.1em;
-            margin-bottom: 15px;
-            color: #444;
+        
+        .hero p {
+            font-size: 1.3rem;
+            max-width: 700px;
+            margin-bottom: 2rem;
+            text-shadow: 1px 1px 4px rgba(44,44,44,0.1);
+            animation: fadeInUp 1s ease-out 0.3s both;
+            color: #4a4a4a;
+        }
+        
+        .scroll-indicator {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: bounce 2s infinite;
+        }
+        
+        .scroll-arrow {
+            width: 30px;
+            height: 30px;
+            border: 2px solid #2c2c2c;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            color: #2c2c2c;
+        }
+        
+        .scroll-arrow:hover {
+            background: #2c2c2c;
+            color: #ffffff;
+        }
+        
+        /* Social Links */
+        .social-links {
+            position: absolute;
+            top: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 20px;
+            z-index: 10;
+        }
+        
+        .social-link {
+            width: 50px;
+            height: 50px;
+            border: 2px solid #2c2c2c;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #2c2c2c;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+        }
+        
+        .social-link:hover {
+            background: #2c2c2c;
+            color: #ffffff;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(44,44,44,0.3);
+        }
+        
+        .social-link svg {
+            width: 24px;
+            height: 24px;
+        }
+        
+        /* Content Sections */
+        .section {
+            min-height: auto;
+            padding: 60px 5%;
+            display: flex;
+            align-items: center;
+            background: #ffffff;
+        }
+        
+        .section:nth-child(even) {
+            background: #ffffff;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            width: 100%;
+        }
+        
+        .content-box {
+            display: grid;
+            grid-template-columns: 1fr 400px;
+            gap: 60px;
+            align-items: center;
+            margin-bottom: 60px;
+        }
+        
+        .text-content h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            font-weight: bold;
+            letter-spacing: 1px;
+            color: #1a1a1a;
+        }
+        
+        .text-content p {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            margin-bottom: 2rem;
+            color: #4a4a4a;
+        }
+        
+        .content-image {
+            width: 100%;
+            height: 300px;
+            border-radius: 15px;
+            object-fit: cover;
+            border: 2px solid #e8e5e0;
+            transition: all 0.3s ease;
+        }
+        
+        .content-image:hover {
+            transform: scale(1.02);
+            box-shadow: 0 10px 30px rgba(44,44,44,0.15);
+            border-color: #d0ccc7;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 15px 30px;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            border: 2px solid #2c2c2c;
+            cursor: pointer;
+            letter-spacing: 0.5px;
+            background: #2c2c2c;
+            color: #ffffff;
+            box-shadow: 0 5px 15px rgba(44,44,44,0.2);
+        }
+        
+        .btn:hover {
+            background: transparent;
+            color: #2c2c2c;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(44,44,44,0.3);
+        }
+        
+        /* Final Section */
+        .final-section {
+            background: #ffffff;
+        }
+        
+        .final-section .content-box {
+            margin-bottom: 0;
+        }
+        
+        .final-section h2 {
+            color: #1a1a1a;
+        }
+        
+        .final-section p {
+            color: #4a4a4a;
+        }
+        
+        .final-section .content-image {
+            border-color: #e8e5e0;
+        }
+        
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateX(-50%) translateY(0);
+            }
+            40% {
+                transform: translateX(-50%) translateY(-10px);
+            }
+            60% {
+                transform: translateX(-50%) translateY(-5px);
+            }
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero p {
+                font-size: 1.2rem;
+                padding: 0 20px;
+            }
+            
+            .content-box {
+                grid-template-columns: 1fr;
+                gap: 40px;
+                text-align: center;
+            }
+            
+            .text-content h2 {
+                font-size: 2rem;
+            }
+            
+            .section {
+                padding: 60px 5%;
+            }
+            
+            .social-links {
+                top: 20px;
+                gap: 15px;
+            }
+            
+            .social-link {
+                width: 45px;
+                height: 45px;
+            }
+            
+            .social-link svg {
+                width: 20px;
+                height: 20px;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <p>hello guys im the dev behind $text</p>
-        
-        <p>so i saw a guy make a coin where he put his phone number and named it "callme"</p>
-        
-        <p>so i had an idea where people could text a number and get tokenized instantly</p>
-        
-        <p>the number links to chatgpt which sends api requests to pumpfun on your behalf</p>
-        
-        <p>okay enough yap the number is below and there are no socials because idk how to run socials so i just made this website</p>
-        
-        <div class="phone-number">+19707101062</div>
-        
-        <div class="ca-section">
-            <h3>CA</h3>
-            <p>CA : DzQ51kQMYUW1nC8VdDsrRz32uVvifR3Y2Vyjpqezpump </p>
-            <p>ill put the ca on the website so just refresh when you see my coins coming out but youll which is mine anyways just scroll down on the deployer wallet</p>
+    <!-- Hero Section -->
+    <section class="hero">
+        <!-- Social Links -->
+        <div class="social-links">
+            <a href="https://x.com/60pumpcoin" class="social-link" target="_blank" rel="noopener noreferrer" title="X (Twitter)">
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                </svg>
+            </a>
         </div>
-    </div>
+        
+        <h1>60</h1>
+        <p>PumpFun's legendary meme number that started it all</p>
+        <div class="scroll-indicator" onclick="scrollToNext()">
+            <div class="scroll-arrow">↓</div>
+        </div>
+    </section>
+    
+    <!-- Section 1 -->
+    <section class="section" id="section1">
+        <div class="container">
+            <div class="content-box">
+                <div class="text-content">
+                    <h2>The Birth of 60</h2>
+                    <p>On PumpFun's first day going public, exactly 60 coins were created on the platform. This wasn't planned marketing or a deliberate stunt - it just happened to be the perfect number that launched the meme coin revolution. That magical first day gave birth to what would become PumpFun's signature number forever.</p>
+                    <a href="https://pump.fun" class="btn" target="_blank" rel="noopener noreferrer">Visit PumpFun</a>
+                </div>
+                <img src="601.png" alt="PumpFun's First Day" class="content-image">
+            </div>
+            
+            <div class="content-box">
+                <div class="text-content">
+                    <h2>The Meme Legacy</h2>
+                    <p>Since that legendary first day, 60 has become PumpFun's unofficial mascot number. The team embraced it, the community ran with it, and now it's woven into the platform's DNA. From internal jokes to community references, 60 represents the chaotic energy and perfect timing that made PumpFun the meme coin factory it is today.</p>
+                    <a href="https://dexscreener.com/search?q=pumpfun" class="btn" target="_blank" rel="noopener noreferrer">Explore the Numbers</a>
+                </div>
+                <img src="602.png" alt="The 60 Connection" class="content-image">
+            </div>
+        </div>
+    </section>
+    
+    <!-- Section 2 -->
+    <section class="section" id="section2">
+        <div class="container">
+            <div class="content-box">
+                <div class="text-content">
+                    <h2>Forever 60</h2>
+                    <p>What started as a random coincidence has become crypto folklore. PumpFun didn't just create a platform - they accidentally created a meme number that perfectly captures the wild, unpredictable nature of meme coins. 60 isn't just a number anymore; it's a symbol of that first day magic when anything seemed possible and the meme coin era truly began.</p>
+                    <a href="https://twitter.com/search?q=pumpfun%2060&src=typed_query" class="btn" target="_blank" rel="noopener noreferrer">Join the Legend</a>
+                </div>
+                <img src="603.png" alt="60 Forever" class="content-image">
+            </div>
+        </div>
+    </section>
+    
+    <script>
+        function scrollToNext() {
+            document.getElementById('section1').scrollIntoView({
+                behavior: 'smooth'
+            });
+        }
+        
+        // Add scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animation = 'fadeInUp 0.8s ease-out forwards';
+                }
+            });
+        }, observerOptions);
+        
+        document.querySelectorAll('.content-box').forEach(box => {
+            observer.observe(box);
+        });
+    </script>
 </body>
 </html>
-
